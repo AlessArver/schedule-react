@@ -1,12 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
+import {BrowserRouter} from "react-router-dom";
 import * as serviceWorker from './serviceWorker';
+import App from './App';
+import {addSchedule, addTodo, state} from "./redux";
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+      <BrowserRouter>
+          <App state={state} addSchedule={addSchedule} addTodo={addTodo} />
+      </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')
 );
