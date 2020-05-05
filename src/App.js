@@ -10,8 +10,8 @@ function App(props) {
   return (
     <div className="app-wrapper">
         <Navbar />
-        <Route path="/schedules" render={() => <Schedules schedulesPage={props.state.schedulesPage} addSchedule={props.addSchedule} />} />
-        <Route path="/todos" render={() => <Todos todosPage={props.state.todosPage} addTodo={props.addTodo} />} />
+        <Route path="/schedules" render={() => <Schedules schedulesPage={props.state.schedulesPage} addSchedule={props.addSchedule} updateNewSchedule={props.updateNewSchedule} />} />
+        <Route path="/todos" render={() => <Todos todosPage={props.state.todosPage} addTodo={props.addTodo} updateNewTodoText={props.updateNewTodoText} />} />
         <Route path="/settings" render={() => <Settings />} />
     </div>
   );

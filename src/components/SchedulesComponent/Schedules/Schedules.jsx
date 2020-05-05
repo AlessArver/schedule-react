@@ -3,24 +3,24 @@ import * as style from "./Schedules.module.css"
 import Schedule from "./Schedule/Schedule";
 
 const Schedules = props => {
-    console.log(props)
     let newScheduleText = React.createRef()
     let newScheduleDate = React.createRef()
 
-    let addSchedule = e => {
-        let text = newScheduleText.current.value
-        let date = newScheduleDate.current.value
+    let addSchedule = () => props.addSchedule()
 
-        props.addSchedule(text, date)
+    let onScheduleChange = () => {
+        props.updateNewSchedule(newScheduleText.current.value, newScheduleDate.current.value)
     }
 
     return (
         <>
             <div className={style.schedules}>
-                {props.schedulesPage.schedules.map(s => <Schedule text={s.text} date={s.date} key={s.id} />)}
+                {props.schedulesPage.schedules.map(s => <Schedule text={s.text} date={s.date} key={s.id}/>)}
             </div>
-            <textarea ref={newScheduleText} placeholder="What you'll to do?" />
-            <input ref={newScheduleDate} type="date" />
+            <textarea ref={newScheduleText} onChange={onScheduleChange} value={props.schedulesPage.newScheduleText}
+                      placeholder="What you'll to do?"/>
+            <input ref={newScheduleDate} onChange={onScheduleChange} type="date"
+                   value={props.schedulesPage.newScheduleDate}/>
             <button onClick={addSchedule}>Add Schedule</button>
         </>
     )
