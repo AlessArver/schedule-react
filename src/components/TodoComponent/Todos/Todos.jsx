@@ -6,10 +6,13 @@ const Todos = props => {
     let newTodoText = React.createRef()
 
     let addTodo = e => {
-        if (e.key === "Enter") props.addTodo()
+        if (e.key === "Enter") props.dispatch({type: "ADD-TODO"})
     }
 
-    let onTodoTextChange = () => props.updateNewTodoText(newTodoText.current.value)
+    let onTodoTextChange = () => props.dispatch({
+        type: "UPDATE-NEW-TODO",
+        text: newTodoText.current.value
+    })
 
     return (
         <>

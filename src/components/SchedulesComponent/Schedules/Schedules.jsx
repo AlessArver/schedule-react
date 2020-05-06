@@ -6,10 +6,14 @@ const Schedules = props => {
     let newScheduleText = React.createRef()
     let newScheduleDate = React.createRef()
 
-    let addSchedule = () => props.addSchedule()
+    let addSchedule = () => props.dispatch({type: "ADD-SCHEDULE"})
 
     let onScheduleChange = () => {
-        props.updateNewSchedule(newScheduleText.current.value, newScheduleDate.current.value)
+        props.dispatch({
+            type: "UPDATE-NEW-SCHEDULE",
+            text: newScheduleText.current.value,
+            date: newScheduleDate.current.value
+        })
     }
 
     return (
