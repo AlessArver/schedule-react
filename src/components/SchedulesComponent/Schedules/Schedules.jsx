@@ -1,19 +1,17 @@
 import React from "react";
 import * as style from "./Schedules.module.css"
 import Schedule from "./Schedule/Schedule";
+import {addScheduleAC, updateNewScheduleAC} from "../../../redux";
 
 const Schedules = props => {
     let newScheduleText = React.createRef()
     let newScheduleDate = React.createRef()
 
-    let addSchedule = () => props.dispatch({type: "ADD-SCHEDULE"})
+    let addSchedule = () => props.dispatch(addScheduleAC())
 
     let onScheduleChange = () => {
-        props.dispatch({
-            type: "UPDATE-NEW-SCHEDULE",
-            text: newScheduleText.current.value,
-            date: newScheduleDate.current.value
-        })
+
+        props.dispatch(updateNewScheduleAC(newScheduleText.current.value, newScheduleDate.current.value))
     }
 
     return (
