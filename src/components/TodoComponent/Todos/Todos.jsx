@@ -1,7 +1,7 @@
 import React from "react";
 import * as s from "./Todos.module.css"
 import Todo from "./Todo/Todo";
-import {addTodoAC, updateNewTodoAC} from "../../../redux";
+import {addTodoAC, updateNewTodoAC} from "../../../redux/todoReducer";
 
 const Todos = props => {
     let newTodoText = React.createRef()

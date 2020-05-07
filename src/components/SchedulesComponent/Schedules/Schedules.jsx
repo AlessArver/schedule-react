@@ -1,7 +1,7 @@
 import React from "react";
 import * as style from "./Schedules.module.css"
 import Schedule from "./Schedule/Schedule";
-import {addScheduleAC, updateNewScheduleAC} from "../../../redux";
+import {addScheduleAC, updateNewScheduleAC} from "../../../redux/scheduleReducer";
 
 const Schedules = props => {
     let newScheduleText = React.createRef()

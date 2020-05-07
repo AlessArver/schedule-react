@@ -1,6 +1,6 @@
 import React from "react"
 import * as s from "./Todo.module.css"
-import {comnpleteTodoAC} from "../../../../redux";
+import {comnpleteTodoAC} from "../../../../redux/todoReducer";
 
 const Todo = props => {
     let complete = false
