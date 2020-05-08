@@ -10,7 +10,7 @@ const maStateToProps = state => ({
 })
 const mapDispatchToProps = dispatch => ({
     updateNewScheduleText: (text, date) => dispatch(updateNewScheduleAC(text, date)),
-    addSchedule: dispatch(addScheduleAC())
+    addSchedule: () => dispatch(addScheduleAC())
 })
 
 const SchedulesComponent = connect(maStateToProps, mapDispatchToProps)(Schedules)

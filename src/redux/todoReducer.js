@@ -14,22 +14,28 @@ const initialState = {
 
 export const todoReducer = (state = initialState, action) => {
     switch (action.type) {
-        case ADD_TODO:
+        case ADD_TODO: {
             let newTodo = {
                 id: 4,
                 text: state.newTodoText,
                 isComplete: false
             }
-
-            state.todos.push(newTodo)
-            state.newTodoText = ""
-            return state
-        case UPDATE_NEW_TODO:
-            state.newTodoText = action.text
-            return state
-        case COMPLETE_TODO:
-            state.newTodoIsComplete = action.isComplete
-            return state
+            let stateCopy = {...state}
+            stateCopy.todos = [...state.todos]
+            stateCopy.todos.push(newTodo)
+            stateCopy.newTodoText = ""
+            return stateCopy
+        }
+        case UPDATE_NEW_TODO: {
+            let stateCopy = {...state}
+            stateCopy.newTodoText = action.text
+            return stateCopy
+        }
+        case COMPLETE_TODO: {
+            let stateCopy = {...state}
+            stateCopy.newTodoIsComplete = action.isComplete
+            return stateCopy
+        }
         default:
             return state
     }
