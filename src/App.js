@@ -2,8 +2,8 @@ import React from 'react';
 import { Route } from "react-router-dom";
 import './App.css';
 import Navbar from "./components/Navbar/Navbar";
-import {SchedulesComponent} from "./components/Schedules/SchedulesComponent";
-import {TodosComponent} from "./components/Todo/TodosComponent";
+import SchedulesComponent from "./components/Schedules/SchedulesComponent";
+import TodosComponent from "./components/Todo/TodosComponent";
 import Settings from "./components/SettingsContainer/Settings/Settings";
 
 function App(props) {

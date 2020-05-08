@@ -1,7 +1,17 @@
 const ADD_SCHEDULE = "ADD-SCHEDULE"
 const UPDATE_NEW_SCHEDULE = "UPDATE-NEW-SCHEDULE"
 
-export const scheduleReducer = (state, action) => {
+const initialState = {
+    schedules: [
+        {id: 1, text: "Go to party", date: "01.05.2021"},
+        {id: 2, text: "Go to Museum", date: "01.05.2021"},
+        {id: 3, text: "Go to party", date: "01.05.2021"}
+    ],
+    newScheduleText: "",
+    newScheduleDate: ""
+}
+
+export const scheduleReducer = (state = initialState, action) => {
     switch (action.type) {
         case ADD_SCHEDULE:
             let newSchedule = {

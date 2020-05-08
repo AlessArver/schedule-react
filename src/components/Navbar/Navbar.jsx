@@ -9,5 +9,4 @@ const Navbar = () => (
         <NavLink to="/settings" activeClassName={s.active}>Settings</NavLink>
     </nav>
 )
-
 export default Navbar

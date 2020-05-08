@@ -1,20 +1,17 @@
 import React from "react";
+import {connect} from "react-redux";
 import {addScheduleAC, updateNewScheduleAC} from "../../redux/scheduleReducer";
 import Schedules from "./Schedules";
 
-export const SchedulesComponent = props => {
-    const store = props.store.getState().schedulesPage
+const maStateToProps = state => ({
+    schedules: state.schedulesPage.schedules,
+    newScheduleText: state.schedulesPage.newScheduleText,
+    newScheduleDate: state.schedulesPage.newScheduleDate
+})
+const mapDispatchToProps = dispatch => ({
+    updateNewScheduleText: (text, date) => dispatch(updateNewScheduleAC(text, date)),
+    addSchedule: dispatch(addScheduleAC())
+})
 
-    let addSchedule = () => props.store.dispatch(addScheduleAC())
-    let updateNewScheduleText = (text, date) => {
-        props.store.dispatch(updateNewScheduleAC(text, date))
-    }
-
-    return (<Schedules
-        updateNewScheduleText={updateNewScheduleText}
-        addSchedule={addSchedule}
-        schedules={store.schedules}
-        newScheduleText={props.newScheduleText}
-        newScheduleDate={store.newScheduleDate}
-    />)
-}
+const SchedulesComponent = connect(maStateToProps, mapDispatchToProps)(Schedules)
+export default SchedulesComponent

@@ -3,8 +3,8 @@ import {scheduleReducer} from "./scheduleReducer";
 import {todoReducer} from "./todoReducer";
 
 const reducers = combineReducers({
-    scheduleReducer,
-    todoReducer
+    schedulesPage: scheduleReducer,
+    todosPage: todoReducer
 })
 
 const store = createStore(reducers)

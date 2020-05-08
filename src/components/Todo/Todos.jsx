@@ -13,8 +13,8 @@ const Todos = props => {
     let todos = props.todos.map(t => <Todo
         text={t.text}
         isComplete={t.isComplete}
-        key={t.id}
         completeTodo={props.completeTodo}
+        key={t.id}
     />)
 
     return (
@@ -30,5 +30,4 @@ const Todos = props => {
         </>
     )
 }
-
 export default Todos
