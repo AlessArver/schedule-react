@@ -1,6 +1,5 @@
 import React from "react"
 import * as s from "./Todo.module.css"
-import {comnpleteTodoAC} from "../../../../redux/todoReducer";
 
 const Todo = props => {
     let complete = false
@@ -11,8 +10,7 @@ const Todo = props => {
 
     let onComplete = () => {
         complete = !complete
-        console.log(complete)
-        props.dispatch(comnpleteTodoAC(complete))
+        props.completeTodo(complete)
     }
 
     return (
