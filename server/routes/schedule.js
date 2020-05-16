@@ -7,8 +7,8 @@ router.get("/:id", controller.getSchedule)
 
 router.post("/create", controller.createSchedule)
 
-router.put("/update", controller.updateSchedule)
+router.put("/update/:id", controller.updateSchedule)
 
-router.delete("/delete", controller.deleteSchedule)
+router.delete("/delete/:id", controller.deleteSchedule)
 
 module.exports = router

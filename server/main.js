@@ -1,11 +1,8 @@
 const express = require("express")
+const cookieParser = require("cookie-parser")
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose')
-
-// routes
-const scheduleRoutes = require("./routes/schedule")
-const todoRoutes = require("./routes/todo")
-const userRoutes = require("./routes/user")
+const auth = require("./middleware/auth")
 
 const PORT = 5000
 const app = express()
@@ -13,14 +10,16 @@ const app = express()
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-app.use("/schedules", scheduleRoutes)
-app.use("/todos", todoRoutes)
-app.use("/user", userRoutes)
+app.use(cookieParser())
+
+app.use("/api/schedules", auth, require("./routes/schedule"))
+app.use("/api/todos", auth, require("./routes/todo"))
+app.use("/api/user", require("./routes/user"))
 
 const start = async () => {
     try {
         await mongoose.connect(
-            "mongodb+srv://username:password@cluster0-7s2go.mongodb.net/schedules",
+            "mongodb+srv://admin:12345@cluster0-7s2go.mongodb.net/schedules",
             {
                 useNewUrlParser: true,
                 useFindAndModify: true,

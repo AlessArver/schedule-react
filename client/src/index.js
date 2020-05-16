@@ -2,17 +2,20 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {BrowserRouter} from "react-router-dom";
 import {Provider} from "react-redux";
+import {CookiesProvider} from "react-cookie";
 import * as serviceWorker from './serviceWorker';
 import store from "./redux";
 import App from './App';
 
 ReactDOM.render(
     <React.StrictMode>
-        <BrowserRouter>
-            <Provider store={store}>
-                <App store={store}/>
-            </Provider>
-        </BrowserRouter>
+        <CookiesProvider>
+            <BrowserRouter>
+                <Provider store={store}>
+                    <App store={store}/>
+                </Provider>
+            </BrowserRouter>
+        </CookiesProvider>
     </React.StrictMode>,
     document.getElementById('root')
 );

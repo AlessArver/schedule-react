@@ -11,7 +11,7 @@ const initialState = {
     newScheduleDate: ""
 }
 
-export const scheduleReducer = (state = initialState, action) => {
+const scheduleReducer = (state = initialState, action) => {
     switch (action.type) {
         case ADD_SCHEDULE:
             return {
@@ -36,6 +36,7 @@ export const scheduleReducer = (state = initialState, action) => {
             return state
     }
 }
+export default scheduleReducer
 
 export const addScheduleAC = () => ({type: "ADD-SCHEDULE"})
 export const updateNewScheduleAC = (text, date) => ({

@@ -11,7 +11,7 @@ const initialState = {
     newTodoText: ""
 }
 
-export const todoReducer = (state = initialState, action) => {
+const todoReducer = (state = initialState, action) => {
     switch (action.type) {
         case ADD_TODO:
             return {
@@ -41,6 +41,7 @@ export const todoReducer = (state = initialState, action) => {
             return state
     }
 }
+export default todoReducer
 
 export const addTodoAC = () => ({type: "ADD-TODO"})
 export const updateNewTodoAC = text => ({type: "UPDATE-NEW-TODO", text})
