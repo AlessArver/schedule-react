@@ -1,8 +1,17 @@
 import * as React from "react";
 import {connect} from "react-redux";
+import Cookies from 'universal-cookie';
 import Auth from "./Auth";
-import {registerUser, loadingUser, loadedUser, updateNewUserEmail, updateNewUserPassword} from "../../redux/authReducer";
+import {
+    registerUser,
+    loadingUser,
+    loadedUser,
+    updateNewUserEmail,
+    updateNewUserPassword
+} from "../../redux/authReducer";
 import userApi from "../../api/user";
+
+const cookies = new Cookies();
 
 class AuthContainer extends React.Component {
     register = user => {
@@ -14,11 +23,14 @@ class AuthContainer extends React.Component {
     }
 
     login = (user) => {
-        this.props.loadingUser()
+        this.props.loadingUser(true)
         userApi.login(user.email, user.password)
-            .then(res => {
+            .then(data => {
                 debugger
-                // this.props.loadedUser(token, user)
+                this.props.loadingUser(false)
+                cookies.set("token", data.token, {path: "/"});
+                let token = cookies.get("token")
+                this.props.loadedUser(token, {user: data.user})
             })
     }
 
@@ -37,11 +49,11 @@ class AuthContainer extends React.Component {
 }
 
 const mapStateToProps = state => ({
-    user: state.authPage.user,
-    loggedIn: state.authPage.loggedIn,
-    cookies: state.authPage.cookies,
-    newUserEmail: state.authPage.newUserEmail,
-    newUserPassword: state.authPage.newUserPassword
+    user: state.auth.user,
+    loggedIn: state.auth.loggedIn,
+    token: state.auth.token,
+    newUserEmail: state.auth.newUserEmail,
+    newUserPassword: state.auth.newUserPassword
 })
 
 export default connect(mapStateToProps, {

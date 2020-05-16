@@ -44,7 +44,7 @@ exports.login = async (req, res) => {
         )
         console.log(user)
         res
-            .json({token, userId: user.id, message: "U a logged in"})
+            .json({token, user, message: "U a logged in"})
             .cookie("userToken", token)
     } catch (e) {
         res.status(500).json({message: "Что-то пошло не так. Попробуйте снова."})

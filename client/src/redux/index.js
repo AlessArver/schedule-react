@@ -6,9 +6,10 @@ import authReducder from "./authReducer";
 const reducers = combineReducers({
     schedulesPage: scheduleReducer,
     todosPage: todoReducer,
-    authPage: authReducder
+    auth: authReducder
 })
 
 const store = createStore(reducers)
+window.store = store
 
 export default store

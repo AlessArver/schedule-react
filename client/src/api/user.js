@@ -1,7 +1,7 @@
 import axios from "axios"
 
 const instance = axios.create({
-    baseURL: "http://localhost:3001/api/user",
+    baseURL: "http://localhost:3000/api/user/",
     headers: {
         // "Access-Control-Allow-Origin": "*",
         'Content-Type': 'application/json'
@@ -10,7 +10,7 @@ const instance = axios.create({
 
 const userApi = {
     register(name, surname, email, password) {
-        return instance.post(`/register`, {
+        return instance.post(`register`, {
             name,
             surname,
             email,
@@ -18,10 +18,12 @@ const userApi = {
         })
     },
     login(email, password) {
-        return instance.post(`/login`, {
-            email,
-            password
-        })
+        return instance
+            .post(`login`, {
+                email,
+                password
+            })
+            .then(res => res.data)
     }
 }
 export default userApi

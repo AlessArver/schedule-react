@@ -1,5 +1,3 @@
-import {useCookies} from 'react-cookie';
-
 const USER_LOADING = "USER-LOADING"
 const USER_LOADED = "USER-LOADED"
 const REGISTER = "REGISTER"
@@ -9,16 +7,10 @@ const UPDATE_NEW_USER_EMAIL = "UPDATE-NEW-USER-EMAIL"
 const UPDATE_NEW_USER_PASSWORD = "UPDATE-NEW-USER-PASSWORD"
 
 const initialState = {
+    user: null,
     loggedIn: false,
     token: "",
     isLoading: false,
-    user: {
-        id: "",
-        name: "",
-        surname: "",
-        email: "",
-        password: ""
-    },
     newUserEmail: "",
     newUserPassword: ""
 }
@@ -28,30 +20,25 @@ const authReducder = (state = initialState, action) => {
         case USER_LOADING:
             return {
                 ...state,
-                isLoading: true
+                isLoading: action.isLoading
             }
         case USER_LOADED:
             return {
                 ...state,
-                loggedIn: true,
-                token: action.token,
-                isLoading: false,
-                user: action.user,
+                ...action.user,
+                loggedIn: true
             }
         case REGISTER:
             return {
                 ...state,
                 ...action.user,
-                token: action.token,
-                loggedIn: true,
-                isLoading: false
+                loggedIn: true
             }
         case REGISTER_FAIL:
             return {
                 ...state,
                 loggedIn: false,
                 token: null,
-                isLoading: false,
                 user: null
             }
         case UPDATE_NEW_USER_EMAIL:
@@ -64,8 +51,8 @@ const authReducder = (state = initialState, action) => {
 }
 export default authReducder
 
-export const loadingUser = () => ({type: USER_LOADING})
-export const loadedUser = (token, user) => ({type: USER_LOADED, token, user})
-export const registerUser = (token, user) => ({type: REGISTER, token, user})
+export const loadingUser = isLoading => ({type: USER_LOADING, isLoading})
+export const loadedUser = user => ({type: USER_LOADED, user})
+export const registerUser = (user) => ({type: REGISTER, user})
 export const updateNewUserEmail = text => ({type: UPDATE_NEW_USER_EMAIL, text})
 export const updateNewUserPassword = text => ({type: UPDATE_NEW_USER_PASSWORD, text})
