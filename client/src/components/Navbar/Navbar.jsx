@@ -7,6 +7,7 @@ const Navbar = () => (
         <NavLink to="/schedules" activeClassName={s.active}>Schedule</NavLink>
         <NavLink to="/todos" activeClassName={s.active}>Todos</NavLink>
         <NavLink to="/settings" activeClassName={s.active}>Settings</NavLink>
+        <NavLink to="/auth" activeClassName={s.active}>Auth</NavLink>
     </nav>
 )
 export default Navbar

@@ -1,6 +1,5 @@
 import React from 'react';
 import { Route } from "react-router-dom";
-import { withCookies } from 'react-cookie';
 import './App.css';
 import NavbarContainer from "./components/Navbar/NavbarContainer";
 import SchedulesComponent from "./components/Schedules/SchedulesComponent";
@@ -20,4 +19,4 @@ function App(props) {
   );
 }
 
-export default withCookies(App);
+export default App

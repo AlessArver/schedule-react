@@ -10,12 +10,14 @@ const instance = axios.create({
 
 const userApi = {
     register(name, surname, email, password) {
-        return instance.post(`register`, {
-            name,
-            surname,
-            email,
-            password
-        })
+        return instance
+            .post(`register`, {
+                name,
+                surname,
+                email,
+                password
+            })
+            .then(res => res.data)
     },
     login(email, password) {
         return instance
