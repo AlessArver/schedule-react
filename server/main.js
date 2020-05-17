@@ -19,7 +19,7 @@ app.use("/api/user", require("./routes/user"))
 const start = async () => {
     try {
         await mongoose.connect(
-            "mongodb+srv://admin:12345@cluster0-7s2go.mongodb.net/schedules",
+            "mongodb+srv://name:password@cluster0-7s2go.mongodb.net/schedules",
             {
                 useNewUrlParser: true,
                 useFindAndModify: true,
