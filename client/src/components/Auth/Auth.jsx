@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React from "react";
 
 const Auth = props => {
     let newUserName = React.createRef()
@@ -24,7 +24,10 @@ const Auth = props => {
 
     const login = (e) => {
         e.preventDefault()
-        const user = {email: newUserEmail.current.value, password: newUserPassword.current.value}
+        const user = {
+            email: newUserEmail.current.value,
+            password: newUserPassword.current.value
+        }
         props.login(user)
     }
 

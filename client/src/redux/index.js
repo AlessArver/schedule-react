@@ -1,7 +1,8 @@
-import {combineReducers, createStore} from "redux";
+import {applyMiddleware, combineReducers, createStore} from "redux";
 import scheduleReducer from "./scheduleReducer";
 import  todoReducer from "./todoReducer";
 import authReducder from "./authReducer";
+import thunk from "redux-thunk";
 
 const reducers = combineReducers({
     schedulesPage: scheduleReducer,
@@ -9,7 +10,7 @@ const reducers = combineReducers({
     auth: authReducder
 })
 
-const store = createStore(reducers)
+const store = createStore(reducers, applyMiddleware(thunk))
 window.store = store
 
 export default store
