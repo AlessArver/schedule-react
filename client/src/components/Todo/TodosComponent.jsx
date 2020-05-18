@@ -2,6 +2,7 @@ import React from "react";
 import {connect} from "react-redux";
 import {addTodoAC, completeTodoAC, updateNewTodoAC} from "../../redux/todoReducer";
 import Todos from "./Todos";
+import {withAuthRedirect} from "../../hoc/withAuthRouter";
 
 const mapStateToProps = state => ({
     todos: state.todosPage.todos,
@@ -13,5 +14,6 @@ const mapDispatchToProps = dispatch => ({
     completeTodo: id => dispatch(completeTodoAC(id))
 })
 
-const TodosComponent = connect(mapStateToProps, mapDispatchToProps)(Todos)
-export default TodosComponent
+const AuthRedirectComponent = withAuthRedirect(Todos)
+
+export default connect(mapStateToProps, mapDispatchToProps)(AuthRedirectComponent)
