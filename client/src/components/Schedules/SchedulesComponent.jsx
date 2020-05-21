@@ -3,6 +3,7 @@ import {connect} from "react-redux";
 import {addScheduleAC, updateNewScheduleAC} from "../../redux/scheduleReducer";
 import Schedules from "./Schedules";
 import {withAuthRedirect} from "../../hoc/withAuthRouter";
+import {compose} from "redux";
 
 const maStateToProps = state => ({
     schedules: state.schedulesPage.schedules,
@@ -14,6 +15,7 @@ const mapDispatchToProps = dispatch => ({
     addSchedule: () => dispatch(addScheduleAC())
 })
 
-const AuthRedirectComponent = withAuthRedirect(Schedules)
-
-export default connect(maStateToProps, mapDispatchToProps)(AuthRedirectComponent)
+export default compose(
+    connect(maStateToProps, mapDispatchToProps),
+    withAuthRedirect
+)(Schedules)

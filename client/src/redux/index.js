@@ -3,11 +3,13 @@ import scheduleReducer from "./scheduleReducer";
 import  todoReducer from "./todoReducer";
 import authReducder from "./authReducer";
 import thunk from "redux-thunk";
+import { reducer as formReducer } from 'redux-form'
 
 const reducers = combineReducers({
     schedulesPage: scheduleReducer,
     todosPage: todoReducer,
-    auth: authReducder
+    auth: authReducder,
+    form: formReducer
 })
 
 const store = createStore(reducers, applyMiddleware(thunk))

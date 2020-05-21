@@ -1,5 +1,6 @@
 import React from "react";
 import {connect} from "react-redux";
+import {compose} from "redux";
 import {addTodoAC, completeTodoAC, updateNewTodoAC} from "../../redux/todoReducer";
 import Todos from "./Todos";
 import {withAuthRedirect} from "../../hoc/withAuthRouter";
@@ -14,6 +15,7 @@ const mapDispatchToProps = dispatch => ({
     completeTodo: id => dispatch(completeTodoAC(id))
 })
 
-const AuthRedirectComponent = withAuthRedirect(Todos)
-
-export default connect(mapStateToProps, mapDispatchToProps)(AuthRedirectComponent)
+export default compose(
+    connect(mapStateToProps, mapDispatchToProps),
+    withAuthRedirect
+)(Todos)

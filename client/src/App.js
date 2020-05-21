@@ -5,7 +5,7 @@ import NavbarContainer from "./components/Navbar/NavbarContainer";
 import SchedulesComponent from "./components/Schedules/SchedulesComponent";
 import TodosComponent from "./components/Todo/TodosComponent";
 import Settings from "./components/SettingsContainer/Settings/Settings";
-import Auth from "./components/Auth/AuthContainer";
+import Auth from "./components/Auth/Auth";
 
 function App(props) {
   return (
