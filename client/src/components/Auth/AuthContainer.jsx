@@ -3,11 +3,7 @@ import {connect} from "react-redux";
 import Auth from "./Auth";
 import {
     register,
-    login,
-    updateNewUserEmail,
-    updateNewUserPassword,
-    updateNewUserName,
-    updateNewUserSurname
+    login
 } from "../../redux/authReducer";
 
 class AuthContainer extends React.Component {
@@ -22,16 +18,8 @@ class AuthContainer extends React.Component {
     render() {
         return <Auth
             user={this.props.user}
-            newUserName={this.props.newUserName}
-            newUserSurname={this.props.newUserSurname}
-            newUserEmail={this.props.newUserEmail}
-            newUserPassword={this.props.newUserPassword}
             loggedIn={this.props.loggedIn}
             cookies={this.props.cookies}
-            updateNewUserName={this.props.updateNewUserName}
-            updateNewUserSurname={this.props.updateNewUserSurname}
-            updateNewUserEmail={this.props.updateNewUserEmail}
-            updateNewUserPassword={this.props.updateNewUserPassword}
             login={this.login}
             register={this.register}
         />
@@ -41,18 +29,10 @@ class AuthContainer extends React.Component {
 const mapStateToProps = state => ({
     user: state.auth.user,
     loggedIn: state.auth.loggedIn,
-    token: state.auth.token,
-    newUserName: state.auth.newUserName,
-    newUserSurname: state.auth.newUserSurname,
-    newUserEmail: state.auth.newUserEmail,
-    newUserPassword: state.auth.newUserPassword
+    token: state.auth.token
 })
 
 export default connect(mapStateToProps, {
     register,
-    login,
-    updateNewUserName,
-    updateNewUserSurname,
-    updateNewUserEmail,
-    updateNewUserPassword
+    login
 })(AuthContainer)
