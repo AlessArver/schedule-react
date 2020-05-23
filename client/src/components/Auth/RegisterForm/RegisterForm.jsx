@@ -1,5 +1,12 @@
 import React from "react";
 import {Field} from "redux-form"
+import {Input} from "../../common/Forms/Forms";
+import {maxLength, minLength, required} from "../../../utils/validators";
+
+const minLengthEmail = minLength(3)
+
+const minLengthPassword = minLength(8)
+const maxLengthEP = maxLength(255)
 
 const RegisterForm = props => {
     return (
@@ -8,26 +15,30 @@ const RegisterForm = props => {
                 type="text"
                 name="name"
                 placeholder="name"
-                component="input"
+                validate={[required]}
+                component={Input}
             />
             <Field
                 type="text"
                 name="surname"
                 placeholder="surname"
-                component="input"
+                validate={[required]}
+                component={Input}
             />
 
             <Field
                 type="email"
                 name="email"
                 placeholder="email"
-                component="input"
+                validate={[required, minLengthEmail, maxLengthEP]}
+                component={Input}
             />
             <Field
                 type="password"
                 name="password"
                 placeholder="password"
-                component="input"
+                validate={[required, minLengthPassword, maxLengthEP]}
+                component={Input}
             />
             <button type="submit">Register</button>
         </form>
