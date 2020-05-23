@@ -7,10 +7,13 @@ exports.register = async (req, res) => {
     try {
         const errors = validationResult(req)
         if (!errors.isEmpty())
-            return res.status(400).json({
-                errors: errors.array(),
-                message: "Введите корректную почту и пароль."
-            })
+            return res
+                //.status(400)
+                .json({
+                    resultCode: 1,
+                    errors: errors.array(),
+                    message: "Введите корректную почту и пароль."
+                })
 
         const {name, surname, email, password} = req.body
         const hashedPassword = await bcrypt.hash(password, 12)
@@ -20,9 +23,11 @@ exports.register = async (req, res) => {
 
         res
             .status(201)
-            .json({message: "Регистрация прошла успешно"})
+            .json({resultCode: 0, message: "Регистрация прошла успешно"})
     } catch (e) {
-        res.status(500).json({message: "Что-то пошло не так. Попробуйте снова."})
+        res
+            .status(500)
+            .json({resultCode: 0, message: "Что-то пошло не так. Попробуйте снова."})
     }
 }
 
@@ -30,55 +35,36 @@ exports.login = async (req, res) => {
     try {
         const {email, password} = req.body
         const user = await User.findOne({email})
-        if (!user)
-            return res.status(400).json({message: "Пользователя с такими данными не существует"})
 
         const isMatch = await bcrypt.compare(password, user.password)
         if (!email || !isMatch)
-            return res.status(400).json({message: "Введите почту и пароль для входа"})
+            return res
+                // .status(400)
+                .json({resultCode: 1, message: "Введите почту и пароль для входа"})
 
-        const token = jwt.sign(
+        const token = await jwt.sign(
             {userId: user.id},
             "secret",
             {expiresIn: "1h"}
         )
-        console.log(user)
         res
-            .json({token, user, message: "U a logged in"})
             .cookie("userToken", token)
+            .json({resultCode: 0, token, user, message: "U a logged in"})
     } catch (e) {
-        res.status(500).json({message: "Что-то пошло не так. Попробуйте снова."})
+        throw e
+        // res
+        //     .status(500)
+        //     .json({resultCode: 1, message: "Что-то пошло не так. Попробуйте снова.", e: e})
     }
 }
 
 exports.getUser = (req, res) => {
-    User.findById(req.params.id, (err, user) => {
-        if (err) throw err
-        else res.send(user)
-    })
-}
-
-exports.updateUser = (req, res) => {
-    let user = {
-        name: req.body.name,
-        surname: req.body.surname,
-        email: req.body.email,
-        password: req.body.password
-    }
-
-    User.findByIdAndUpdate(
-        req.params.id,
-        user,
-        (err, user) => {
+    try {
+        User.findById(req.params.id, (err, user) => {
             if (err) throw err
-            else res.json({message: "user is updated"})
-        }
-    )
-}
-
-exports.deleteUser = (req, res) => {
-    User.findByIdAndDelete(req.params.id, err => {
-        if (err) throw err
-        else res.json({message: "user is deleted"})
-    })
+            else res.json({resultCode: 0, user})
+        })
+    } catch (e) {
+        res.json({resultCode: 1, message: e})
+    }
 }
