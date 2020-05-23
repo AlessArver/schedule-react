@@ -6,9 +6,7 @@ const initialState = {
         {id: 1, text: "Go to party", date: "01.05.2021"},
         {id: 2, text: "Go to Museum", date: "01.05.2021"},
         {id: 3, text: "Go to party", date: "01.05.2021"}
-    ],
-    newScheduleText: "",
-    newScheduleDate: ""
+    ]
 }
 
 const scheduleReducer = (state = initialState, action) => {
@@ -16,13 +14,12 @@ const scheduleReducer = (state = initialState, action) => {
         case ADD_SCHEDULE:
             return {
                 ...state,
-                newScheduleText: "",
                 schedules: [
                     ...state.schedules,
                     {
                         id: 4,
-                        text: state.newScheduleText,
-                        date: state.newScheduleDate
+                        text: action.text,
+                        date: action.date
                     }
                 ]
             }
@@ -38,8 +35,8 @@ const scheduleReducer = (state = initialState, action) => {
 }
 export default scheduleReducer
 
-export const addScheduleAC = () => ({type: "ADD-SCHEDULE"})
-export const updateNewScheduleAC = (text, date) => ({
+export const addSchedule = (text, date) => ({type: "ADD-SCHEDULE", text, date})
+export const updateNewSchedule = (text, date) => ({
     type: "UPDATE-NEW-SCHEDULE",
     text,
     date

@@ -5,7 +5,6 @@ const cookies = new Cookies();
 
 const USER_LOADING = "USER-LOADING"
 const USER_LOADED = "USER-LOADED"
-const REGISTER = "REGISTER"
 const LOGOUT = "LOGOUT"
 
 const initialState = {
@@ -26,17 +25,8 @@ const authReducder = (state = initialState, action) => {
             return {
                 ...state,
                 ...action.user,
-                loggedIn: true,
-                newUserEmail: "",
-                newUserPassword: ""
-            }
-        case REGISTER:
-            return {
-                ...state,
-                newUserName: "",
-                newUserSurname: "",
-                newUserEmail: "",
-                newUserPassword: ""
+                token: action.token,
+                loggedIn: true
             }
         default:
             return state
@@ -45,8 +35,7 @@ const authReducder = (state = initialState, action) => {
 export default authReducder
 
 const loadingUser = isLoading => ({type: USER_LOADING, isLoading})
-const loadedUser = (user) => ({type: USER_LOADED, user})
-const registerUser = () => ({type: REGISTER})
+const loadedUser = (token, user) => ({type: USER_LOADED, token, user})
 
 export const register = user => dispatch => {
     dispatch(loadingUser(true))
@@ -54,7 +43,6 @@ export const register = user => dispatch => {
     userApi.register(name, surname, email, password)
         .then(data => {
             alert(data.message)
-            dispatch(registerUser())
         })
 }
 export const login = user => dispatch => {

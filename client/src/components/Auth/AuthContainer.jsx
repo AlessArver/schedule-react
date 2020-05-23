@@ -7,13 +7,8 @@ import {
 } from "../../redux/authReducer";
 
 class AuthContainer extends React.Component {
-    register = user => {
-        this.props.register(user)
-    }
-
-    login = user => {
-        this.props.login(user)
-    }
+    register = user => this.props.register(user)
+    login = user => this.props.login(user)
 
     render() {
         return <Auth

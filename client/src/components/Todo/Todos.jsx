@@ -1,14 +1,28 @@
 import React from "react";
 import * as s from "./Todos.module.css"
 import Todo from "./Todo/Todo";
+import {Field, reduxForm} from "redux-form";
+import {maxLength, required} from "../../utils/validators";
+import {Input} from "../common/Forms/Forms";
+
+const maxLengthTodo = maxLength(100)
+
+const TodoForm = props => (
+    <form onSubmit={props.handleSubmit}>
+        <Field
+            name="text"
+            placeholder="What you'll to do?"
+            validate={[required, maxLengthTodo]}
+            component={Input}
+        />
+        <button>Submit</button>
+    </form>
+)
+
+const TodoReduxForm = reduxForm({form: "todoForm"})(TodoForm)
 
 const Todos = props => {
-    let newTodoText = React.createRef()
-
-    let addTodo = e => {
-        if (e.key === "Enter") props.addTodo()
-    }
-    let onTodoTextChange = () => props.updateTodoText(newTodoText.current.value)
+    const onSubmit = data => props.addTodo(data.text)
 
     let todos = props.todos.map(t => <Todo
         text={t.text}
@@ -21,13 +35,7 @@ const Todos = props => {
     return (
         <>
             <div className={s.todos}>{todos}</div>
-            <textarea
-                ref={newTodoText}
-                onChange={onTodoTextChange}
-                onKeyPress={addTodo}
-                value={props.newTodoText}
-                placeholder="What you'll to do?"
-            />
+            <TodoReduxForm onSubmit={onSubmit} />
         </>
     )
 }

@@ -7,8 +7,7 @@ const initialState = {
         {id: 1, text: "Buy Amazon company", complete: true},
         {id: 2, text: "Sing very cool song", complete: true},
         {id: 3, text: "Run 5km", complete: false}
-    ],
-    newTodoText: ""
+    ]
 }
 
 const todoReducer = (state = initialState, action) => {
@@ -21,7 +20,7 @@ const todoReducer = (state = initialState, action) => {
                     ...state.todos,
                     {
                         id: 4,
-                        text: state.newTodoText,
+                        text: action.text,
                         complete: false
                     }
                 ]
@@ -43,6 +42,6 @@ const todoReducer = (state = initialState, action) => {
 }
 export default todoReducer
 
-export const addTodoAC = () => ({type: "ADD-TODO"})
-export const updateNewTodoAC = text => ({type: "UPDATE-NEW-TODO", text})
-export const completeTodoAC = id => ({type: "COMPLETE-TODO", id})
+export const addTodo = text => ({type: "ADD-TODO", text})
+export const updateNewTodo = text => ({type: "UPDATE-NEW-TODO", text})
+export const completeTodo = id => ({type: "COMPLETE-TODO", id})
