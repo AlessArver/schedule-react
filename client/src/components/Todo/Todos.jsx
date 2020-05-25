@@ -4,6 +4,7 @@ import Todo from "./Todo/Todo";
 import {Field, reduxForm} from "redux-form";
 import {maxLength, required} from "../../utils/validators";
 import {Input} from "../common/Forms/Forms";
+import {completed, toggleIsCompletedSuccess, updateText} from "../../redux/todoReducer";
 
 const maxLengthTodo = maxLength(100)
 
@@ -26,16 +27,19 @@ const Todos = props => {
 
     let todos = props.todos.map(t => <Todo
         text={t.text}
-        complete={t.complete}
-        onComplete={props.completeTodo}
+        completed={t.completed}
         id={t.id}
         key={t.id}
+        updateText={props.updateText}
+        onCompleted={props.completed}
+        completedInProgress={props.completedInProgress}
+        toggleIsCompletedSuccess={props.toggleIsCompletedSuccess}
     />)
 
     return (
         <>
             <div className={s.todos}>{todos}</div>
-            <TodoReduxForm onSubmit={onSubmit} />
+            <TodoReduxForm onSubmit={onSubmit}/>
         </>
     )
 }

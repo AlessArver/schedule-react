@@ -1,5 +1,6 @@
 const ADD_SCHEDULE = "ADD-SCHEDULE"
-const UPDATE_NEW_SCHEDULE = "UPDATE-NEW-SCHEDULE"
+const UPDATE_SCHEDULE_TEXT = "UPDATE-SCHEDULE-TEXT"
+const UPDATE_SCHEDULE_DATE = "UPDATE-SCHEDULE-DATE"
 
 const initialState = {
     schedules: [
@@ -16,28 +17,19 @@ const scheduleReducer = (state = initialState, action) => {
                 ...state,
                 schedules: [
                     ...state.schedules,
-                    {
-                        id: 4,
-                        text: action.text,
-                        date: action.date
-                    }
+                    {id: 4, text: action.text, date: action.date}
                 ]
             }
-        case UPDATE_NEW_SCHEDULE:
-            return {
-                ...state,
-                newScheduleText: action.text,
-                newScheduleDate: action.date
-            }
+        case UPDATE_SCHEDULE_TEXT:
+            return {...state, text: action.text}
+        case UPDATE_SCHEDULE_DATE:
+            return {...state, date: action.date}
         default:
             return state
     }
 }
 export default scheduleReducer
 
-export const addSchedule = (text, date) => ({type: "ADD-SCHEDULE", text, date})
-export const updateNewSchedule = (text, date) => ({
-    type: "UPDATE-NEW-SCHEDULE",
-    text,
-    date
-})
+export const addSchedule = (text, date) => ({type: ADD_SCHEDULE, text, date})
+export const updateScheduleText = text => ({type: UPDATE_SCHEDULE_TEXT, text})
+export const updateScheduleDate = date => ({type: UPDATE_SCHEDULE_DATE, date})

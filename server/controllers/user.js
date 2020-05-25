@@ -68,3 +68,18 @@ exports.getUser = (req, res) => {
         res.json({resultCode: 1, message: e})
     }
 }
+
+exports.getAuthUser = async (req, res) => {
+    try {
+        const token = req.cookies['userToken'];
+        const decoded = jwt.verify(token, "secret")
+        let user = decoded
+
+        User.findById(user.userId, (err, user) => {
+            err ? res.json({resultCode: 1, message: "Нет авторизации"})
+                : res.json({resultCode: 0, token: req.token, user})
+        })
+    } catch (e) {
+        res.json({resultCode: 1, message: "Нет авторизации"})
+    }
+}

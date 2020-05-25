@@ -4,6 +4,7 @@ import Schedule from "./Schedule/Schedule";
 import {Field, reduxForm} from "redux-form";
 import {Input} from "../common/Forms/Forms";
 import {maxLength, required} from "../../utils/validators";
+import {updateScheduleDate} from "../../redux/scheduleReducer";
 
 const maxLengthSchedule = maxLength(100)
 
@@ -30,12 +31,18 @@ const ScheduleReduxForm = reduxForm({form: "scheduleForm"})(ScheduleForm)
 const Schedules = props => {
     const onSubmit = data => props.addSchedule(data.text, data.date)
 
-    let schedules = props.schedules.map(s => <Schedule text={s.text} date={s.date} key={s.id}/>)
+    let schedules = props.schedules.map(s => <Schedule
+        text={s.text}
+        date={s.date}
+        key={s.id}
+        updateScheduleText={props.updateScheduleText}
+        updateScheduleDate={props.updateScheduleDate}
+    />)
 
     return (
         <>
             <div className={style.schedules}>{schedules}</div>
-            <ScheduleReduxForm onSubmit={onSubmit} />
+            <ScheduleReduxForm onSubmit={onSubmit}/>
         </>
     )
 }

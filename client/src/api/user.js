@@ -26,6 +26,11 @@ const userApi = {
                 password
             })
             .then(res => res.data)
+    },
+    getAuthUser() {
+        return instance
+            .get("/")
+            .then(res => res.data)
     }
 }
 export default userApi

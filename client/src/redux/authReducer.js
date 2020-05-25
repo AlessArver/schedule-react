@@ -37,9 +37,8 @@ const setAuthUser = (loggedIn, token, user) => ({
 })
 
 export const getAuthUser = () => dispatch => {
-    return userAuthApi.getAuthUser()
+    return userApi.getAuthUser()
         .then(data => {
-            debugger
             if (data.resultCode === 0)
                 dispatch(setAuthUser(true, data.token, data.user))
             else alert(data.message)
@@ -60,7 +59,6 @@ export const register = user => dispatch => {
 export const login = user => dispatch => {
     userApi.login(user.email, user.password)
         .then(data => {
-            debugger
             if (data.resultCode === 0) dispatch(getAuthUser())
              else {
                 alert(data.message)

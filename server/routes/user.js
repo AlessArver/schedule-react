@@ -14,4 +14,6 @@ router.post("/login", controller.login)
 
 router.get("/:id", controller.getUser)
 
+router.get("/", controller.getAuthUser)
+
 module.exports = router

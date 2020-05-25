@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Route, withRouter} from "react-router-dom";
 import './App.css';
 import NavbarContainer from "./components/Navbar/NavbarContainer";
@@ -11,25 +11,21 @@ import {initializeApp} from "./redux/appReducer";
 import {connect} from "react-redux";
 import Preloader from "./components/common/Preloader/Preloder";
 
-class App extends React.Component {
-    componentDidMount() {
-        this.props.initializeApp()
-    }
+const App = props => {
+    useEffect(() => props.initializeApp(), [props.initialized])
 
-    render() {
-        if (this.props.initialized)
-            return (
-                <div className="app-wrapper">
-                    <NavbarContainer/>
-                    <Route path="/schedules" render={() => <SchedulesComponent store={this.props.store}/>}/>
-                    <Route path="/todos" render={() => <TodosComponent store={this.props.store}/>}/>
-                    <Route path="/settings" render={() => <Settings/>}/>
-                    <Route path="/auth" render={() => <AuthContainer/>}/>
-                </div>
-            );
-        else return <Preloader />
-    }
-}
+    if (props.initialized)
+        return (
+            <div className="app-wrapper">
+                <NavbarContainer/>
+                <Route path="/schedules" render={() => <SchedulesComponent store={props.store}/>}/>
+                <Route path="/todos" render={() => <TodosComponent store={props.store}/>}/>
+                <Route path="/settings" render={() => <Settings/>}/>
+                <Route path="/auth" render={() => <AuthContainer/>}/>
+            </div>
+        );
+    else return <Preloader/>
+};
 
 const mapStateToProps = state => ({initialized: state.app.initialized})
 

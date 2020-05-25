@@ -22,7 +22,6 @@ export default appReducer
 export const initializedSuccess = () => ({type: INITIALIZED_SUCCESS})
 
 export const initializeApp = () => dispatch => {
-    dispatch(initializedSuccess())
-    // dispatch(getAuthUser())
-    //     .then(() => dispatch(initializedSuccess()))
+    dispatch(getAuthUser())
+        .then(() => dispatch(initializedSuccess()))
 }

@@ -1,13 +1,15 @@
 const ADD_TODO = "ADD-TODO"
-const UPDATE_NEW_TODO = "UPDATE-NEW-TODO"
-const COMPLETE_TODO = "COMPLETE-TODO"
+const UPDATE_TODO_TEXT = "UPDATE-TODO-TEXT"
+const TOGGLE_IS_COMPLETED_TODO = "TOGGLE-IS-COMPLETED-TODO"
+const TOGGLE_IS_COMPLETED_IN_PROGRESS = "TOGGLE-IS-COMPLETED-IN-PROGRESS"
 
 const initialState = {
     todos: [
-        {id: 1, text: "Buy Amazon company", complete: true},
-        {id: 2, text: "Sing very cool song", complete: true},
-        {id: 3, text: "Run 5km", complete: false}
-    ]
+        {id: 1, text: "Buy Amazon company", completed: true},
+        {id: 2, text: "Sing very cool song", completed: true},
+        {id: 3, text: "Run 5km", completed: false}
+    ],
+    completedInProgress: []
 }
 
 const todoReducer = (state = initialState, action) => {
@@ -21,20 +23,27 @@ const todoReducer = (state = initialState, action) => {
                     {
                         id: 4,
                         text: action.text,
-                        complete: false
+                        completed: false
                     }
                 ]
             }
-        case UPDATE_NEW_TODO:
-            return {...state, newTodoText: action.text}
-        case COMPLETE_TODO:
+        case UPDATE_TODO_TEXT:
+            return {...state, text: action.text}
+        case TOGGLE_IS_COMPLETED_TODO:
             return {
                 ...state,
                 todos: state.todos.map(t => {
                     if (t.id === action.id)
-                        return {...t, complete: !t.complete}
+                        return {...t, completed: !t.completed}
                     return t
                 })
+            }
+        case TOGGLE_IS_COMPLETED_IN_PROGRESS:
+            return {
+                ...state,
+                completedInProgress: action.completedInProgress
+                    ? [...state.completedInProgress, action.id]
+                    : state.completedInProgress.filter(id => id !== action.id)
             }
         default:
             return state
@@ -43,5 +52,9 @@ const todoReducer = (state = initialState, action) => {
 export default todoReducer
 
 export const addTodo = text => ({type: "ADD-TODO", text})
-export const updateNewTodo = text => ({type: "UPDATE-NEW-TODO", text})
-export const completeTodo = id => ({type: "COMPLETE-TODO", id})
+export const updateText = text => ({type: "UPDATE-NEW-TODO", text})
+export const toggleIsCompletedSuccess = id => ({type: "COMPLETED-TODO", id})
+export const completedInProgress = (completedInProgress, id) => ({
+    type: TOGGLE_IS_COMPLETED_IN_PROGRESS,
+    completedInProgress, id
+})
