@@ -1,9 +1,7 @@
-import userApi from '../api/user';
-import {stopSubmit} from 'redux-form';
-
-const USER_LOADING = 'USER-LOADING'
-const SET_AUTH_USER = 'USER-LOADED'
-const LOGOUT = 'LOGOUT'
+import userApi from '../../api/user'
+import * as authActions from '../actions/auth'
+import {stopSubmit} from 'redux-form'
+import * as authType from '../types/auth'
 
 const initialState = {
     user: null,
@@ -11,9 +9,9 @@ const initialState = {
     token: ''
 }
 
-const authReducder = (state = initialState, action) => {
+export default (state = initialState, action) => {
     switch (action.type) {
-        case SET_AUTH_USER:
+        case authType.SET_AUTH_USER:
             return {
                 ...state,
                 user: action.user,
@@ -24,22 +22,15 @@ const authReducder = (state = initialState, action) => {
             return state
     }
 }
-export default authReducder
-
-const loadingUser = isLoading => ({type: USER_LOADING, isLoading})
-const setAuthUser = (loggedIn, token, user) => ({
-    type: SET_AUTH_USER,
-    loggedIn, token, user
-})
 
 export const getAuthUser = () => async dispatch => {
     const data = await userApi.getAuthUser()
     if (data.resultCode === 0)
-        dispatch(setAuthUser(true, data.token, data.user))
+        dispatch(authActions.setAuthUser(true, data.token, data.user))
     else console.log(data.message)
 }
 export const register = user => async dispatch => {
-    dispatch(loadingUser(true))
+    dispatch(authActions.loadingUser(true))
     let {name, surname, email, password} = user
     const data = await userApi.register(name, surname, email, password)
     if (!data.resultCode) alert(data.message)
@@ -60,6 +51,6 @@ export const logout = () => async dispatch => {
     const data = await userApi.logout()
     if (data.resultCode === 0) {
         alert(data.message)
-        dispatch(setAuthUser(false, null, null))
+        dispatch(authActions.setAuthUser(false, null, null))
     }
 }

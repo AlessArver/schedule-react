@@ -1,0 +1,7 @@
+export const SET_SCHEDULES = '/schedule-react/schedule/SET-SCHEDULES'
+export const ADD_SCHEDULE = '/schedule-react/schedule/ADD-SCHEDULE'
+export const DELETE_SCHEDULE = '/schedule-react/schedule/DELETE-SCHEDULE'
+export const UPDATE_SCHEDULE_TEXT = '/schedule-react/schedule/UPDATE-SCHEDULE-TEXT'
+export const UPDATE_SCHEDULE_DATE = '/schedule-react/schedule/UPDATE-SCHEDULE-DATE'
+export const TOGGLE_IS_FETCHING = '/schedule-react/schedule/TOGGLE-IS-FETCHING'
+export const TOGGLE_SCHEDULE_IS_LOADING = '/schedule-react/schedule/TOGGLE-SCHEDULE-IS-LOADING'

@@ -1,1 +1,0 @@
-export const getSchedules = state => state.schedulesPage.schedules

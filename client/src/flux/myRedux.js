@@ -1,5 +1,5 @@
-import {scheduleReducer} from "./scheduleReducer";
-import {todoReducer} from "./todoReducer";
+import {scheduleReducer} from "./reducers/schedule";
+import {todo} from "./reducers/todo";
 
 const store = {
     _state: {

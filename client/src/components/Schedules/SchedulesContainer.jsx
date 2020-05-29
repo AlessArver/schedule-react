@@ -1,16 +1,15 @@
-import React, {useEffect} from 'react'
+import React from 'react'
 import {connect} from 'react-redux'
 import {
     addSchedule,
     deleteSchedule,
     requestSchedules, updateScheduleDate,
     updateScheduleText
-} from '../../redux/scheduleReducer'
+} from '../../flux/reducers/schedule'
 import Schedules from './Schedules'
 import {withAuthRedirect} from '../../hoc/withAuthRouter'
 import {compose} from 'redux'
-import {getSchedules} from '../../redux/scheduleSelector'
-import Preloader from '../common/Preloader/Preloder'
+import {getIsLoading, getSchedules, getSchedulesIsLoading} from '../../selectors/schedule'
 
 class SchedulesAPIContainer extends React.Component {
     componentWillMount() {
@@ -29,8 +28,8 @@ class SchedulesAPIContainer extends React.Component {
 
 const maStateToProps = state => ({
     schedules: getSchedules(state),
-    isLoading: state.schedulesPage.isLoading,
-    schedulesIsLoading: state.schedulesPage.schedulesIsLoading
+    isLoading: getIsLoading(state),
+    schedulesIsLoading: getSchedulesIsLoading(state)
 })
 
 export default compose(

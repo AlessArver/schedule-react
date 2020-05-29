@@ -3,8 +3,8 @@ import {BrowserRouter, Redirect, Route, Switch, withRouter} from 'react-router-d
 import './App.css'
 import NavbarContainer from './components/Navbar/NavbarContainer'
 import {compose} from 'redux'
-import store from './redux'
-import {initializeApp} from './redux/appReducer'
+import store from './flux'
+import {initializeApp} from './flux/reducers/app'
 import {connect, Provider} from 'react-redux'
 import Preloader from './components/common/Preloader/Preloder'
 

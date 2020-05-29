@@ -2,14 +2,10 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {compose} from 'redux'
 import {withAuthRedirect} from '../../hoc/withAuthRouter'
-import {
-    addTodo,
-    setTodoText,
-    completedInProgress,
-    toggleIsCompletedSuccess, requestTodos, deleteTodo, updateTodoText
-} from '../../redux/todoReducer'
+import {addTodo, requestTodos, deleteTodo, updateTodoText} from '../../flux/reducers/todo'
 import Todos from './Todos'
-import {getCompletedInProgress, getTodos} from '../../redux/todoSelector'
+import {getCompletedInProgress, getTodos, getTodosIsLoading} from '../../selectors/todo'
+import {toggleIsCompletedSuccess} from '../../flux/actions/todo'
 
 class TodoAPIContainer extends React.Component {
     componentDidMount() {
@@ -29,7 +25,7 @@ class TodoAPIContainer extends React.Component {
 const mapStateToProps = state => ({
     todos: getTodos(state),
     completedInProgress: getCompletedInProgress(state),
-    todosIsLoading: state.todosPage.todosIsLoading
+    todosIsLoading: getTodosIsLoading(state)
 })
 
 export default compose(

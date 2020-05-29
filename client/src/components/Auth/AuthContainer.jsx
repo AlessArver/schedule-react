@@ -4,7 +4,7 @@ import Auth from "./Auth";
 import {
     register,
     login
-} from "../../redux/authReducer";
+} from "../../flux/reducers/auth";
 
 class AuthContainer extends React.Component {
     register = user => this.props.register(user)
