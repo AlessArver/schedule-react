@@ -7,9 +7,9 @@ router.get("/:id", controller.getTodo)
 
 router.post("/create", controller.createTodo)
 
-router.post("/complete", controller.completeTodo)
+router.put("/isCompleted/:id", controller.completeTodo)
 
-router.put("/update/:id", controller.updateTodo)
+router.put("/update-text/:id", controller.updateTodo)
 
 router.delete("/delete/:id", controller.deleteTodo)
 

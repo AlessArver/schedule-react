@@ -8,6 +8,7 @@ const RegisterReduxForm = reduxForm({form: "register"})(RegisterForm)
 
 const Auth = props => {
     const loginOnSubmit = formData => props.login(formData)
+
     const registerOnSubmit = formData => props.register(formData)
 
     return (

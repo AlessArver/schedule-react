@@ -6,3 +6,15 @@
 .form.error small {
     color: #ff0000;
 }
+
+form {
+    width: 100%;
+}
+
+input {
+    margin: 5px 0;
+    padding: 10px 0;
+    width: 100%;
+    border: 1px solid;
+    border-radius: 10px;
+}

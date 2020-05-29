@@ -16,4 +16,7 @@ router.get("/:id", controller.getUser)
 
 router.get("/", controller.getAuthUser)
 
+router.put("/update/:id", controller.updateUser)
+router.delete("/delete/:id", controller.logout)
+
 module.exports = router

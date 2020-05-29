@@ -1,6 +1,6 @@
-import {getAuthUser} from "./authReducer";
+import {getAuthUser} from './authReducer';
 
-const INITIALIZED_SUCCESS = "INITIALIZED-SUCCESS"
+const INITIALIZED_SUCCESS = 'INITIALIZED-SUCCESS'
 
 const initialState = {
     initialized: false

@@ -1,0 +1,19 @@
+.card {
+}
+
+.cardContent {
+    display: grid;
+    grid-template-columns: 8fr 1fr;
+    grid-gap: 10px;
+}
+
+.delete {
+    border: 1px solid;
+    border-radius: 100px;
+}
+
+.isCompleted {
+    display: block;
+    border: 1px solid;
+    border-radius: 100px;
+}

@@ -12,9 +12,8 @@ app.use(bodyParser.json());
 
 app.use(cookieParser())
 
-app.use("/api/schedules", auth, require("./routes/schedule"))
-app.use("/api/todos", auth, require("./routes/todo"))
-app.use("/api/me", auth, require("./routes/userAuth"))
+app.use("/api/schedules", auth, require("./routes/schedules"))
+app.use("/api/todos", auth, require("./routes/todos"))
 app.use("/api/user", require("./routes/user"))
 
 const start = async () => {

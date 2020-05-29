@@ -27,6 +27,11 @@ const userApi = {
             })
             .then(res => res.data)
     },
+    logout() {
+        return instance
+            .delete("logout")
+            .then(res => res.data)
+    },
     getAuthUser() {
         return instance
             .get("/")

@@ -1,40 +1,19 @@
-import React from "react";
-import * as style from "./Schedules.module.css"
-import Schedule from "./Schedule/Schedule";
-import {Field, reduxForm} from "redux-form";
-import {Input} from "../common/Forms/Forms";
-import {maxLength, required} from "../../utils/validators";
-import {updateScheduleDate} from "../../redux/scheduleReducer";
+import React from 'react'
+import style from './Schedules.module.css'
+import Schedule from './Schedule/Schedule'
+import {reduxForm} from 'redux-form'
+import ScheduleForm from './ScheduleForm/ScheduleForm'
 
-const maxLengthSchedule = maxLength(100)
-
-const ScheduleForm = props => (
-    <form onSubmit={props.handleSubmit}>
-        <Field
-            name="text"
-            placeholder="What you'll to do?"
-            validate={[required, maxLengthSchedule]}
-            component={Input}
-        />
-        <Field
-            name="date"
-            type="date"
-            validate={[required]}
-            component={Input}
-        />
-        <button>Send</button>
-    </form>
-)
-
-const ScheduleReduxForm = reduxForm({form: "scheduleForm"})(ScheduleForm)
+const ScheduleReduxForm = reduxForm({form: 'scheduleForm'})(ScheduleForm)
 
 const Schedules = props => {
     const onSubmit = data => props.addSchedule(data.text, data.date)
 
-    let schedules = props.schedules.map(s => <Schedule
-        text={s.text}
-        date={s.date}
-        key={s.id}
+    let schedules = props.schedules.map(schedule => <Schedule
+        schedule={schedule}
+        key={schedule._id}
+        schedulesIsLoading={props.schedulesIsLoading}
+        deleteSchedule={props.deleteSchedule}
         updateScheduleText={props.updateScheduleText}
         updateScheduleDate={props.updateScheduleDate}
     />)

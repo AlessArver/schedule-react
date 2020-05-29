@@ -1,1 +1,16 @@
-.active {}
+.active {
+    font-weight: bold;
+}
+
+.nav {
+    grid-column: 2;
+    display: flex;
+    justify-content: center;
+}
+
+.navItem {
+    margin-right: 10px;
+}
+.navItem:nth-last-child(1) {
+    margin-right: 0;
+}
