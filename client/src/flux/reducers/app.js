@@ -1,5 +1,4 @@
 import {getAuthUser} from './auth'
-import * as appType from '../types/app'
 import * as appAction from '../actions/app'
 
 const initialState = {
@@ -8,7 +7,7 @@ const initialState = {
 
 const app = (state = initialState, action) => {
     switch (action.type) {
-        case appType.INITIALIZED_SUCCESS:
+        case appAction.INITIALIZED_SUCCESS:
             return {
                 ...state,
                 initialized: true

@@ -1,5 +1,5 @@
 import todosApi from '../../api/todos'
-import * as todoType from '../types/todo'
+import * as todoType from '../../types/todo'
 import * as todoAction from '../actions/todo'
 
 const initialState = {

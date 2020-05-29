@@ -1,5 +1,4 @@
 import schedulesApi from '../../api/schedules'
-import * as scheduleType from '../types/schedule'
 import * as scheduleAction from '../actions/schedule'
 
 const initialState = {
@@ -10,9 +9,9 @@ const initialState = {
 
 export default (state = initialState, action) => {
     switch (action.type) {
-        case scheduleType.SET_SCHEDULES:
+        case scheduleAction.SET_SCHEDULES:
             return {...state, schedules: action.schedules}
-        case scheduleType.ADD_SCHEDULE:
+        case scheduleAction.ADD_SCHEDULE:
             return {
                 ...state,
                 schedules: [
@@ -20,9 +19,9 @@ export default (state = initialState, action) => {
                     {id: action.id, text: action.text, date: action.date}
                 ]
             }
-        case scheduleType.DELETE_SCHEDULE:
+        case scheduleAction.DELETE_SCHEDULE:
             return {...state, schedules: state.schedules.filter(s => s._id !== action.id)}
-        case scheduleType.UPDATE_SCHEDULE_TEXT:
+        case scheduleAction.UPDATE_SCHEDULE_TEXT:
             return {
                 ...state,
                 schedules: state.schedules.map(s => {
@@ -31,7 +30,7 @@ export default (state = initialState, action) => {
                     return s
                 })
             }
-        case scheduleType.UPDATE_SCHEDULE_DATE:
+        case scheduleAction.UPDATE_SCHEDULE_DATE:
             return {
                 ...state,
                 schedules: state.schedules.map(s => {
@@ -40,9 +39,9 @@ export default (state = initialState, action) => {
                     return s
                 })
             }
-        case scheduleType.TOGGLE_IS_FETCHING:
+        case scheduleAction.TOGGLE_IS_FETCHING:
             return {...state, isFetching: action.isFetching}
-        case scheduleType.TOGGLE_SCHEDULE_IS_LOADING:
+        case scheduleAction.TOGGLE_SCHEDULE_IS_LOADING:
             return {
                 ...state,
                 schedulesIsLoading: action.scheduleIsLoading
