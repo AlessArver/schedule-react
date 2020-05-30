@@ -1,6 +1,5 @@
 export type ScheduleType = {
     _id: string
-    owner: string,
     text: string,
     date: any
 }

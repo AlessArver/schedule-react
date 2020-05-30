@@ -29,6 +29,7 @@ export type UpdateScheduleTextSuccessACType = {
 }
 export type UpdateScheduleDateSuccessACType = {
     type: typeof UPDATE_SCHEDULE_DATE
+    id: string
     date: any
 }
 export type ToggleIsFetchingACType = {
@@ -49,8 +50,8 @@ export const deleteScheduleSuccess = (id: string): DeleteScheduleSuccessACType =
     ({type: DELETE_SCHEDULE, id})
 export const updateScheduleTextSuccess = (id: string, text: string): UpdateScheduleTextSuccessACType =>
     ({type: UPDATE_SCHEDULE_TEXT, id, text})
-export const updateScheduleDateSuccess = (date: any): UpdateScheduleDateSuccessACType =>
-    ({type: UPDATE_SCHEDULE_DATE, date})
+export const updateScheduleDateSuccess = (id: string, date: any): UpdateScheduleDateSuccessACType =>
+    ({type: UPDATE_SCHEDULE_DATE, id, date})
 export const toggleIsFetching = (isFetching: boolean): ToggleIsFetchingACType =>
     ({type: TOGGLE_IS_FETCHING, isFetching})
 export const toggleScheduleIsLoading = (scheduleIsLoading: boolean, id: string): ToggleScheduleIsLoadingACType => ({

@@ -13,10 +13,10 @@ export const loadingUser = (isLoading: boolean): LoadingUserACType => ({type: US
 export type SetAuthUserACType = {
     type: typeof SET_AUTH_USER
     loggedIn: boolean
-    token: string
-    user: UserType
+    token: null | string
+    user: null | UserType
 }
-export const setAuthUser = (loggedIn: boolean, token: string, user: UserType): SetAuthUserACType => ({
+export const setAuthUser = (loggedIn: boolean, token: null | string, user: null | UserType): SetAuthUserACType => ({
     type: SET_AUTH_USER,
     loggedIn, token, user
 })
