@@ -1,6 +1,3 @@
-export const INITIALIZED_SUCCESS: string = '/schedule-react/app/INITIALIZED-SUCCESS'
+import { AppAction, INITIALIZED_SUCCESS } from '../../types/redux/app'
 
-export type InitializedSuccessACType = {
-    type: typeof INITIALIZED_SUCCESS
-}
-export const initializedSuccess = (): InitializedSuccessACType => ({type: INITIALIZED_SUCCESS})
+export const initializedSuccess = (): AppAction => ({type: INITIALIZED_SUCCESS})

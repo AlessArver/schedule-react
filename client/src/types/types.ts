@@ -5,10 +5,10 @@ export type ScheduleType = {
 }
 export type TodoType = {
     _id: string
-    owner: string
+    owner?: string
     text: string
     isCompleted: boolean
-    createdAt: any
+    createdAt?: any
 }
 export type UserType = {
     _id: string

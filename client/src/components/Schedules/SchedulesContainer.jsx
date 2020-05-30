@@ -5,7 +5,7 @@ import {
     deleteSchedule,
     requestSchedules, updateScheduleDate,
     updateScheduleText
-} from '../../flux/reducers/schedule'
+} from '../../flux/thunks/schedule'
 import Schedules from './Schedules'
 import {withAuthRedirect} from '../../hoc/withAuthRouter'
 import {compose} from 'redux'

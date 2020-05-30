@@ -1,4 +1,4 @@
-import {applyMiddleware, combineReducers, createStore} from "redux";
+import { applyMiddleware, combineReducers, compose, createStore } from 'redux'
 import scheduleReducer from "./reducers/schedule";
 import todo from "./reducers/todo";
 import authReducder from "./reducers/auth";
@@ -6,15 +6,20 @@ import thunk from "redux-thunk";
 import {reducer as formReducer} from 'redux-form'
 import app from "./reducers/app";
 
-const reducers = combineReducers({
+const rootReducer = combineReducers({
     app: app,
     schedulesPage: scheduleReducer,
     todosPage: todo,
     auth: authReducder,
     form: formReducer
 })
+type RootReducer = typeof rootReducer
+export type AppState = ReturnType<RootReducer>
 
-const store = createStore(reducers, applyMiddleware(thunk))
+// @ts-ignore
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
+const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunk)))
+// @ts-ignore
 window._store = store
 
 export default store

@@ -1,29 +1,35 @@
-import todosApi from '../../api/todos'
-import * as todoAction from '../actions/todo'
 import {TodoType} from '../../types/types';
+import {
+    ADD_TODO,
+    DELETE_TODO,
+    SET_TODOS, TodoStateType,
+    TOGGLE_IS_COMPLETED_TODO,
+    TOGGLE_TODO_IS_LOADING,
+    UPDATE_TODO_TEXT
+} from '../../types/redux/todo'
 
-const initialState = {
+export const TodoState = {
     todos: [] as Array<TodoType>,
     isFetching: false,
     completedInProgress: [] as Array<number>,
     todosIsLoading: [] as Array<number>
 }
 
-export default (state = initialState, action: any) => {
+export default (state = TodoState, action: any): TodoStateType => {
     switch (action.type) {
-        case todoAction.SET_TODOS:
+        case SET_TODOS:
             return {...state, todos: action.todos}
-        case todoAction.ADD_TODO:
+        case ADD_TODO:
             return {
                 ...state,
                 todos: [
                     ...state.todos,
-                    {id: action.id, text: action.text, completed: false, createdAt: action.createdAt}
+                    {_id: action.id, text: action.text, isCompleted: false, createdAt: action.createdAt}
                 ]
             }
-        case todoAction.DELETE_TODO:
+        case DELETE_TODO:
             return {...state, todos: state.todos.filter(t => t._id !== action.id)}
-        case todoAction.UPDATE_TODO_TEXT:
+        case UPDATE_TODO_TEXT:
             return {
                 ...state,
                 todos: state.todos.filter(t => {
@@ -31,7 +37,7 @@ export default (state = initialState, action: any) => {
                     return t
                 })
             }
-        case todoAction.TOGGLE_IS_COMPLETED_TODO:
+        case TOGGLE_IS_COMPLETED_TODO:
             return {
                 ...state,
                 todos: state.todos.filter(t => {
@@ -40,7 +46,7 @@ export default (state = initialState, action: any) => {
                     return t
                 })
             }
-        case todoAction.TOGGLE_TODO_IS_LOADING:
+        case TOGGLE_TODO_IS_LOADING:
             return {
                 ...state,
                 todosIsLoading: action.todoIsLoading
@@ -50,30 +56,4 @@ export default (state = initialState, action: any) => {
         default:
             return state
     }
-}
-
-export const requestTodos = () => async (dispatch: any) => {
-    dispatch(todoAction.toggleIsFetching(true))
-    const data = await todosApi.getTodos()
-    dispatch(todoAction.setTodos(data.todos))
-    dispatch(todoAction.toggleIsFetching(false))
-}
-export const addTodo = (text: string) => async (dispatch: any) => {
-    const data = await todosApi.createTodo(text)
-    if (!data.resultCode) dispatch(todoAction.addTodoSuccess(text))
-    else console.log(data.message)
-}
-export const deleteTodo = (id: string) => async (dispatch: any) => {
-    dispatch(todoAction.toggleTodoIsLoading(true, id))
-    const data = await todosApi.deleteTodo(id)
-    if (!data.resultCode) dispatch(todoAction.deleteTodoSuccess(id))
-    else console.log(data.message)
-    dispatch(todoAction.toggleTodoIsLoading(false, id))
-}
-export const updateTodoText = (id: string, text: string) => async (dispatch: any) => {
-    dispatch(todoAction.toggleTodoIsLoading(true, id))
-    const data = await todosApi.updateTodoText(id, text)
-    if (!data.resultCode) dispatch(todoAction.updateTodoTextSuccess(id, text))
-    else console.log(data.message)
-    dispatch(todoAction.toggleTodoIsLoading(false, id))
 }

@@ -4,7 +4,7 @@ import './App.css'
 import NavbarContainer from './components/Navbar/NavbarContainer'
 import {compose} from 'redux'
 import store from './flux'
-import {initializeApp} from './flux/reducers/app'
+import {initializeApp} from './flux/thunks/app'
 import {connect, Provider} from 'react-redux'
 import Preloader from './components/common/Preloader/Preloder'
 
