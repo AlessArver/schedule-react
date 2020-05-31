@@ -13,8 +13,8 @@ const rootReducer = combineReducers({
     auth: authReducder,
     form: formReducer
 })
-type RootReducer = typeof rootReducer
-export type AppState = ReturnType<RootReducer>
+type RootReducerType = typeof rootReducer
+export type RootState = ReturnType<RootReducerType>
 
 // @ts-ignore
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose

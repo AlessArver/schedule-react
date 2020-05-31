@@ -1,14 +1,15 @@
 export type ScheduleType = {
     _id: string
-    text: string,
+    readonly owner?: string
+    text: string
     date: any
 }
 export type TodoType = {
     _id: string
-    owner?: string
+    readonly owner?: string
     text: string
     isCompleted: boolean
-    createdAt?: any
+    readonly createdAt?: any
 }
 export type UserType = {
     _id: string

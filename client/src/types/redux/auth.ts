@@ -1,14 +1,16 @@
 import { UserType } from '../types'
+import { ThunkAction } from 'redux-thunk'
+import { RootState } from '../../flux'
 
 export const USER_LOADING: string = '/schedule-react/auth/USER-LOADING'
 export const SET_AUTH_USER: string = '/schedule-react/auth/USER-LOADED'
 
 type LoadingUser = {
-  type: typeof USER_LOADING,
+  readonly type: typeof USER_LOADING,
   isLoading: boolean
 }
 type SetAuthUser = {
-  type: typeof SET_AUTH_USER
+  readonly type: typeof SET_AUTH_USER
   loggedIn: boolean
   token: null | string
   user: null | UserType
@@ -21,3 +23,5 @@ export type AuthStateType = {
   loggedIn: boolean
   token:  null | string
 }
+
+export type AuthThunk = ThunkAction<Promise<void>, RootState, unknown, AuthAction>

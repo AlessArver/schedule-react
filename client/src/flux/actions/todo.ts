@@ -9,15 +9,15 @@ import {
 } from '../../types/redux/todo'
 
 export const setTodos = (todos: Array<TodoType>): TodoAction => ({type: SET_TODOS, todos})
-export const addTodoSuccess = (id: string, text: string): TodoAction => ({type: ADD_TODO, id, text})
-export const deleteTodoSuccess = (id: string): TodoAction => ({type: DELETE_TODO, id})
-export const updateTodoTextSuccess = (id: string, text: string): TodoAction =>
-  ({type: UPDATE_TODO_TEXT, id, text})
-export const toggleIsCompletedSuccess = (id: string): TodoAction =>
-  ({type: TOGGLE_IS_COMPLETED_TODO, id})
+export const addTodoSuccess = (_id: string, text: string): TodoAction => ({type: ADD_TODO, _id, text})
+export const deleteTodoSuccess = (_id: string): TodoAction => ({type: DELETE_TODO, _id})
+export const updateTodoTextSuccess = (_id: string, text: string): TodoAction =>
+  ({type: UPDATE_TODO_TEXT, _id, text})
+export const toggleIsCompletedSuccess = (_id: string): TodoAction =>
+  ({type: TOGGLE_IS_COMPLETED_TODO, _id})
 export const toggleIsFetching = (isFetching: boolean): TodoAction =>
   ({type: TOGGLE_IS_FETCHING, isFetching})
-export const toggleTodoIsLoading = (todoIsLoading: boolean, id: string): TodoAction => ({
+export const toggleTodoIsLoading = (todoIsLoading: boolean, _id: string): TodoAction => ({
   type: TOGGLE_TODO_IS_LOADING,
-  todoIsLoading, id
+  todoIsLoading, _id
 })

@@ -10,6 +10,7 @@ import {
 export const ScheduleState = {
   schedules: [] as Array<ScheduleType>,
   isFetching: false,
+  isLoading: false,
   schedulesIsLoading: [] as Array<number>
 }
 
@@ -22,16 +23,16 @@ export default (state = ScheduleState, action: any): ScheduleStateType => {
         ...state,
         schedules: [
           ...state.schedules,
-          {_id: action.id, text: action.text, date: action.date}
+          {_id: action._id, text: action.text, date: action.date}
         ]
       }
     case DELETE_SCHEDULE:
-      return {...state, schedules: state.schedules.filter(s => s._id !== action.id)}
+      return {...state, schedules: state.schedules.filter(s => s._id !== action._id)}
     case UPDATE_SCHEDULE_TEXT:
       return {
         ...state,
         schedules: state.schedules.map(s => {
-          if (s._id === action.id)
+          if (s._id === action._id)
             return {...s, text: action.text}
           return s
         })
@@ -40,7 +41,7 @@ export default (state = ScheduleState, action: any): ScheduleStateType => {
       return {
         ...state,
         schedules: state.schedules.map(s => {
-          if (s._id === action.id)
+          if (s._id === action._id)
             return {...s, date: action.date}
           return s
         })
@@ -51,8 +52,8 @@ export default (state = ScheduleState, action: any): ScheduleStateType => {
       return {
         ...state,
         schedulesIsLoading: action.scheduleIsLoading
-          ? [...state.schedulesIsLoading, action.id]
-          : state.schedulesIsLoading.filter(id => id !== action.id)
+          ? [...state.schedulesIsLoading, action._id]
+          : state.schedulesIsLoading.filter(_id => _id !== action._id)
       }
     default:
       return state

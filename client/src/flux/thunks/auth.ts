@@ -2,14 +2,15 @@ import userApi from '../../api/user'
 import * as authAction from '../actions/auth'
 import { UserType } from '../../types/types'
 import { stopSubmit } from 'redux-form'
+import { AuthThunk } from '../../types/redux/auth'
 
-export const getAuthUser = () => async (dispatch: any) => {
+export const getAuthUser = (): AuthThunk => async (dispatch) => {
   const data = await userApi.getAuthUser()
   if (data.resultCode === 0)
     dispatch(authAction.setAuthUser(true, data.token, data.user))
   else console.log(data.message)
 }
-
+// stopSubmit dispatch
 export const register = (user: UserType) => async (dispatch: any) => {
   dispatch(authAction.loadingUser(true))
   let {name, surname, email, password} = user
@@ -20,7 +21,6 @@ export const register = (user: UserType) => async (dispatch: any) => {
     dispatch(stopSubmit('register', {_error: data.message}))
   }
 }
-
 export const login = (user: UserType) => async (dispatch: any) => {
   const data = await userApi.login(user.email, user.password)
   if (data.resultCode === 0) dispatch(getAuthUser())
@@ -30,7 +30,7 @@ export const login = (user: UserType) => async (dispatch: any) => {
   }
 }
 
-export const logout = () => async (dispatch: any) => {
+export const logout = (): AuthThunk => async (dispatch) => {
   const data = await userApi.logout()
   if (data.resultCode === 0) {
     alert(data.message)

@@ -14,7 +14,7 @@ exports.getTodos = async (req, res) => {
 exports.getTodo = (req, res) => {
     Todo.findById(req.params.id, (err, todo) => {
         if (err) throw err
-        else res.send(todo)
+        else res.json({ resultCode: 0, todo, message: 'Todo is received' })
     })
 }
 

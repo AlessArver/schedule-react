@@ -24,16 +24,16 @@ export default (state = TodoState, action: any): TodoStateType => {
                 ...state,
                 todos: [
                     ...state.todos,
-                    {_id: action.id, text: action.text, isCompleted: false, createdAt: action.createdAt}
+                    {_id: action._id, text: action.text, isCompleted: false, createdAt: action.createdAt}
                 ]
             }
         case DELETE_TODO:
-            return {...state, todos: state.todos.filter(t => t._id !== action.id)}
+            return {...state, todos: state.todos.filter(t => t._id !== action._id)}
         case UPDATE_TODO_TEXT:
             return {
                 ...state,
                 todos: state.todos.filter(t => {
-                    if (t._id === action.id) return {...t, text: action.text}
+                    if (t._id === action._id) return {...t, text: action.text}
                     return t
                 })
             }
@@ -41,7 +41,7 @@ export default (state = TodoState, action: any): TodoStateType => {
             return {
                 ...state,
                 todos: state.todos.filter(t => {
-                    if (t._id === action.id)
+                    if (t._id === action._id)
                         return {...t, completed: !t.isCompleted}
                     return t
                 })
@@ -50,8 +50,8 @@ export default (state = TodoState, action: any): TodoStateType => {
             return {
                 ...state,
                 todosIsLoading: action.todoIsLoading
-                    ? [...state.todosIsLoading, action.id]
-                    : state.todosIsLoading.filter(id => id !== action.id)
+                    ? [...state.todosIsLoading, action._id]
+                    : state.todosIsLoading.filter(_id => _id !== action._id)
             }
         default:
             return state

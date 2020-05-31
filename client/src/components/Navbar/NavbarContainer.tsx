@@ -1,10 +1,8 @@
-import React from "react"
-import {connect} from "react-redux";
-import Navbar from "./Navbar";
+import React from 'react'
+import Navbar from './Navbar'
 
-class NavbarContainer extends React.Component {
-    render() {
-        return <Navbar />
-    }
+const NavbarContainer = () => {
+  return <Navbar/>
 }
-export default connect()(NavbarContainer)
+
+export default NavbarContainer

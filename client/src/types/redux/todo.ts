@@ -1,5 +1,7 @@
 import { TodoType } from '../types'
 import { TodoState } from '../../flux/reducers/todo'
+import { ThunkAction } from 'redux-thunk'
+import { RootState } from '../../flux'
 
 export const SET_TODOS: string = '/schedule-react/todo/SET-TODOS'
 export const ADD_TODO: string = '/schedule-react/todo/ADD-TODO'
@@ -10,35 +12,35 @@ export const TOGGLE_IS_FETCHING: string = '/schedule-react/todo/TOGGLE-IS-FETCHI
 export const TOGGLE_TODO_IS_LOADING: string = '/schedule-react/todo/TOGGLE-TODO-IS-LOADING'
 
 type SetTodos = {
-  type: typeof SET_TODOS
+  readonly type: typeof SET_TODOS
   todos: Array<TodoType>
 }
 type AddTodoSuccess = {
-  type: typeof ADD_TODO
-  id: string
+  readonly type: typeof ADD_TODO
+  _id: string
   text: string
 }
 type DeleteTodoSuccess = {
-  type: typeof DELETE_TODO
-  id: string
+  readonly type: typeof DELETE_TODO
+  _id: string
 }
 type UpdateTodoTextSuccess = {
-  type: typeof UPDATE_TODO_TEXT
-  id: string
+  readonly type: typeof UPDATE_TODO_TEXT
+  _id: string
   text: string
 }
 type ToggleIsCompletedSuccess = {
-  type: typeof TOGGLE_IS_COMPLETED_TODO
-  id: string
+  readonly type: typeof TOGGLE_IS_COMPLETED_TODO
+  _id: string
 }
 type ToggleIsFetching = {
-  type: typeof TOGGLE_IS_FETCHING
+  readonly type: typeof TOGGLE_IS_FETCHING
   isFetching: boolean
 }
 type ToggleTodoIsLoading = {
-  type: typeof TOGGLE_TODO_IS_LOADING
+  readonly type: typeof TOGGLE_TODO_IS_LOADING
   todoIsLoading: boolean
-  id: string
+  _id: string
 }
 
 export type TodoAction = SetTodos | AddTodoSuccess | DeleteTodoSuccess
@@ -46,3 +48,5 @@ export type TodoAction = SetTodos | AddTodoSuccess | DeleteTodoSuccess
   | ToggleIsFetching | ToggleTodoIsLoading
 
 export type TodoStateType = typeof TodoState
+
+export type TodoThunk = ThunkAction<Promise<void>, RootState, unknown, TodoAction>

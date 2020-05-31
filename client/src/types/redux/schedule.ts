@@ -1,5 +1,7 @@
 import { ScheduleType } from '../types'
 import {ScheduleState} from '../../flux/reducers/schedule'
+import { ThunkAction } from 'redux-thunk'
+import { RootState } from '../../flux'
 
 export const SET_SCHEDULES: string = '/schedule-react/schedule/SET-SCHEDULES'
 export const ADD_SCHEDULE: string = '/schedule-react/schedule/ADD-SCHEDULE'
@@ -10,37 +12,37 @@ export const TOGGLE_IS_FETCHING: string = '/schedule-react/schedule/TOGGLE-IS-FE
 export const TOGGLE_SCHEDULE_IS_LOADING: string = '/schedule-react/schedule/TOGGLE-SCHEDULE-IS-LOADING'
 
 type SetSchedules = {
-  type: typeof SET_SCHEDULES
+  readonly type: typeof SET_SCHEDULES
   schedules: Array<ScheduleType>
 }
 type AddScheduleSuccess = {
-  type: typeof ADD_SCHEDULE
-  id: string
+  readonly type: typeof ADD_SCHEDULE
+  _id: string
   text: string
   date: any
 }
 type DeleteScheduleSuccess = {
-  type: typeof DELETE_SCHEDULE
-  id: string
+  readonly type: typeof DELETE_SCHEDULE
+  _id: string
 }
 type UpdateScheduleTextSuccess = {
-  type: typeof UPDATE_SCHEDULE_TEXT
-  id: string
+  readonly type: typeof UPDATE_SCHEDULE_TEXT
+  _id: string
   text: string
 }
 type UpdateScheduleDateSuccess = {
-  type: typeof UPDATE_SCHEDULE_DATE
-  id: string
+  readonly type: typeof UPDATE_SCHEDULE_DATE
+  _id: string
   date: any
 }
 type ToggleIsFetching = {
-  type: typeof TOGGLE_IS_FETCHING
+  readonly type: typeof TOGGLE_IS_FETCHING
   isFetching: boolean
 }
 type ToggleScheduleIsLoading = {
-  type: typeof TOGGLE_SCHEDULE_IS_LOADING
+  readonly type: typeof TOGGLE_SCHEDULE_IS_LOADING
   scheduleIsLoading: boolean
-  id: string
+  readonly _id: string
 }
 
 export type ScheduleAction = SetSchedules | AddScheduleSuccess | DeleteScheduleSuccess
@@ -48,3 +50,5 @@ export type ScheduleAction = SetSchedules | AddScheduleSuccess | DeleteScheduleS
   | ToggleIsFetching | ToggleScheduleIsLoading
 
 export type ScheduleStateType = typeof ScheduleState
+
+export type ScheduleThunk = ThunkAction<Promise<void>, RootState, unknown, ScheduleAction>
