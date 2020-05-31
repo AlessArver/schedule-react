@@ -1,4 +1,4 @@
-import { UserType } from '../../types/types'
+import { UserType } from '../../types'
 import { AuthAction, SET_AUTH_USER, USER_LOADING } from '../../types/redux/auth'
 
 export const loadingUser = (isLoading: boolean): AuthAction => ({type: USER_LOADING, isLoading})

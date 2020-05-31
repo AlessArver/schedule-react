@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { BaseResponseAPI } from '../types/api'
+import { BaseResponseAPI, UserGetAPI } from '../types/api'
 
 const instance = axios.create({
   baseURL: 'http://localhost:3000/api/user/',
@@ -30,12 +30,12 @@ const userApi = {
   },
   logout() {
     return instance
-      .delete('logout')
+      .delete<BaseResponseAPI>('logout')
       .then(res => res.data)
   },
   getAuthUser() {
     return instance
-      .get('/')
+      .get<UserGetAPI>('/')
       .then(res => res.data)
   }
 }

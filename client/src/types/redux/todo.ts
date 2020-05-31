@@ -1,4 +1,4 @@
-import { TodoType } from '../types'
+import { TodoType } from '../index'
 import { TodoState } from '../../flux/reducers/todo'
 import { ThunkAction } from 'redux-thunk'
 import { RootState } from '../../flux'

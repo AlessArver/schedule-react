@@ -1,6 +1,7 @@
 import * as scheduleAction from '../actions/schedule'
-import schedulesApi, { ResultCodes } from '../../api/schedules'
+import schedulesApi  from '../../api/schedules'
 import { ScheduleThunk } from '../../types/redux/schedule'
+import { ResultCodes } from '../../types/api'
 
 export const requestSchedules = (): ScheduleThunk => async dispatch => {
   dispatch(scheduleAction.toggleIsFetching(true))

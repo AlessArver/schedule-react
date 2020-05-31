@@ -9,11 +9,6 @@ const instance = axios.create({
   }
 })
 
-export enum ResultCodes {
-  Success = 0,
-  Error = 1
-}
-
 const schedulesApi = {
   getSchedlues() {
     return instance

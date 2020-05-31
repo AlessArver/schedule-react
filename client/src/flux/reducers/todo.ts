@@ -1,4 +1,4 @@
-import {TodoType} from '../../types/types';
+import {TodoType} from '../../types';
 import {
     ADD_TODO,
     DELETE_TODO,

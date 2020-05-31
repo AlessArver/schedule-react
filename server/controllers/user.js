@@ -53,9 +53,9 @@ exports.login = async (req, res) => {
 
 exports.getUser = (req, res) => {
   try {
-    User.findById(req.params.id, (err, user) => {
-      if (err) throw err
-      else res.json({ resultCode: 0, user })
+    User.findById(req.params.id, (e, user) => {
+      if (e)     res.json({ resultCode: 1, message: 'Что-то пошло не так. Попробуйте снова.', e: e })
+      else res.json({ resultCode: 0, user, message: 'User received' })
     })
   } catch (e) {
     res.json({ resultCode: 1, message: 'Что-то пошло не так. Попробуйте снова.', e: e })

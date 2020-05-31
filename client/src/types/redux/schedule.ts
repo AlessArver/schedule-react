@@ -1,4 +1,4 @@
-import { ScheduleType } from '../types'
+import { ScheduleType } from '../index'
 import {ScheduleState} from '../../flux/reducers/schedule'
 import { ThunkAction } from 'redux-thunk'
 import { RootState } from '../../flux'

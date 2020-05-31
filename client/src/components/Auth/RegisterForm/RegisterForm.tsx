@@ -1,46 +1,22 @@
 import React, { FC } from 'react'
-import { Field, InjectedFormProps } from 'redux-form'
-import { Input } from '../../common/Forms/Forms'
+import { InjectedFormProps } from 'redux-form'
+import { createField, Input } from '../../common/Forms/Forms'
 import { maxLength, minLength, required } from '../../../utils/validators'
-import { RegisterFormType } from '../../../types/form'
+import { RegisterFormKeys, RegisterFormType } from '../../../types/auth'
 
 const minLengthEmail = minLength(3)
-
 const minLengthPassword = minLength(8)
-const maxLengthEP = maxLength(255)
+const maxLengthField = maxLength(255)
 
-const RegisterForm: FC<RegisterFormType & InjectedFormProps<{}, RegisterFormType>> = ({handleSubmit}) => {
+const RegisterForm: FC<InjectedFormProps<RegisterFormType>> = ({handleSubmit}) => {
   return (
     <form onSubmit={handleSubmit}>
-      <Field
-        type='text'
-        name='name'
-        placeholder='name'
-        validate={[required]}
-        component={Input}
-      />
-      <Field
-        type='text'
-        name='surname'
-        placeholder='surname'
-        validate={[required]}
-        component={Input}
-      />
-
-      <Field
-        type='email'
-        name='email'
-        placeholder='email'
-        validate={[required, minLengthEmail, maxLengthEP]}
-        component={Input}
-      />
-      <Field
-        type='password'
-        name='password'
-        placeholder='password'
-        validate={[required, minLengthPassword, maxLengthEP]}
-        component={Input}
-      />
+      {createField<RegisterFormKeys>('name', 'name', [required], Input)}
+      {createField<RegisterFormKeys>('surname', 'surname', [required], Input)}
+      {createField<RegisterFormKeys>('email', 'email',
+        [required, minLengthEmail, maxLengthField], Input, {type: 'email'})}
+      {createField<RegisterFormKeys>('password', 'password',
+        [required, minLengthPassword, maxLengthField], Input, {type: 'password'})}
       <button type='submit'>Register</button>
     </form>
   )

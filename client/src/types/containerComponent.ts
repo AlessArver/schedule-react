@@ -1,4 +1,4 @@
-import { ScheduleType, TodoType } from './types'
+import { ScheduleType, TodoType } from './index'
 
 export type TodoOwnProps = {}
 export type ScheduleOwnProps = {}
@@ -25,7 +25,6 @@ export type ScheduleMapDispatchToProps = {
   updateScheduleText: () => void
   updateScheduleDate: () => void
 }
-
 
 export type TodoProps = TodoOwnProps & TodoMapStateToProps & TodoMapDispatchToProps
 export type ScheduleProps = ScheduleOwnProps & ScheduleMapStateToProps & ScheduleMapDispatchToProps

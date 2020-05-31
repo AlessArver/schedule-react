@@ -1,4 +1,4 @@
-import { UserType } from '../types'
+import { UserType } from '../index'
 import { ThunkAction } from 'redux-thunk'
 import { RootState } from '../../flux'
 

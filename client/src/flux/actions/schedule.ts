@@ -1,4 +1,4 @@
-import { ScheduleType } from '../../types/types'
+import { ScheduleType } from '../../types'
 import {
   ADD_SCHEDULE,
   DELETE_SCHEDULE, ScheduleAction,

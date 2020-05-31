@@ -20,3 +20,6 @@ export type UserType = {
     schedules: Array<ScheduleType>
     todos: Array<TodoType>
 }
+
+// @ts-ignore
+export type ValidatorType = (value: string) => string | undefined
