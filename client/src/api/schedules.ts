@@ -20,7 +20,7 @@ const schedulesApi = {
       .get<ScheduleGetAPI>(`:${id}`)
       .then(res => res.data)
   },
-  createSchedule(text: string, date: any) {
+  createSchedule(text: string, date: Date) {
     return instance
       .post<GetIdAPI>('create', {text, date})
       .then(res => res.data)
@@ -30,7 +30,7 @@ const schedulesApi = {
       .put<BaseResponseAPI>(`update-text/${id}`, {text})
       .then(res => res.data)
   },
-  updateScheduleDate(id: string, date: any) {
+  updateScheduleDate(id: string, date: Date) {
     return instance
       .put<BaseResponseAPI>(`update-date/${id}`, {date})
       .then(res => res.data)

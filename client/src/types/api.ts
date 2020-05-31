@@ -33,5 +33,6 @@ export interface TodoGetAPI extends BaseResponseAPI {
 }
 export interface UserGetAPI extends BaseResponseAPI {
   user: UserType
+  token: string
 }
 

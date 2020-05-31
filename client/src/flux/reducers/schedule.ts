@@ -11,7 +11,7 @@ export const ScheduleState = {
   schedules: [] as Array<ScheduleType>,
   isFetching: false,
   isLoading: false,
-  schedulesIsLoading: [] as Array<number>
+  schedulesIsLoading: [] as Array<string>
 }
 
 export default (state = ScheduleState, action: any): ScheduleStateType => {

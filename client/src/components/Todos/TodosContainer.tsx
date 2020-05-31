@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
 import { compose } from 'redux'
 import { withAuthRedirect } from '../../hoc/withAuthRouter'
@@ -6,10 +6,11 @@ import { addTodo, deleteTodo, requestTodos, updateTodoText } from '../../flux/th
 import Todos from './Todos'
 import { getTodos, getTodosIsLoading } from '../../selectors/todo'
 import { RootState } from '../../flux'
-import { TodoOwnProps, TodoMapDispatchToProps, TodoMapStateToProps, TodoProps } from '../../types/containerComponent'
+import { TodoMapStateToProps, TodoProps } from '../../types/todo'
 
 class TodoAPIContainer extends React.Component<TodoProps> {
   componentDidMount() {
+    // @ts-ignore
     this.props.requestTodos()
   }
 

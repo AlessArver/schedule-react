@@ -5,7 +5,7 @@ import { AuthThunk } from '../../types/redux/auth'
 import { ResultCodes } from '../../types/api'
 
 export const getAuthUser = (): AuthThunk => async (dispatch) => {
-  const data: any = await userApi.getAuthUser()
+  const data = await userApi.getAuthUser()
   if (data.resultCode === ResultCodes.Success)
     dispatch(authAction.setAuthUser(true, data.token, data.user))
   else console.log(data.message)

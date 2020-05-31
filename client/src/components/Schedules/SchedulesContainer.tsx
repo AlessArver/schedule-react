@@ -12,15 +12,11 @@ import { withAuthRedirect } from '../../hoc/withAuthRouter'
 import { compose } from 'redux'
 import { getSchedules, getSchedulesIsLoading } from '../../selectors/schedule'
 import { RootState } from '../../flux'
-import {
-  ScheduleMapStateToProps,
-  ScheduleProps,
-  ScheduleMapDispatchToProps,
-  ScheduleOwnProps
-} from '../../types/containerComponent'
+import { ScheduleMapStateToProps, ScheduleProps } from '../../types/schedule'
 
 class SchedulesAPIContainer extends React.Component<ScheduleProps> {
   componentDidMount() {
+    // @ts-ignore
     this.props.requestSchedules()
   }
 

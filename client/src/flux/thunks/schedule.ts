@@ -1,5 +1,5 @@
 import * as scheduleAction from '../actions/schedule'
-import schedulesApi  from '../../api/schedules'
+import schedulesApi from '../../api/schedules'
 import { ScheduleThunk } from '../../types/redux/schedule'
 import { ResultCodes } from '../../types/api'
 
@@ -9,9 +9,10 @@ export const requestSchedules = (): ScheduleThunk => async dispatch => {
   dispatch(scheduleAction.setSchedules(data.schedules))
   dispatch(scheduleAction.toggleIsFetching(false))
 }
-export const addSchedule = (text: string, date: any) => async (dispatch: any) => {
+export const addSchedule = (text: string, date: Date) => async (dispatch: any) => {
   const data = await schedulesApi.createSchedule(text, date)
-  if (data.resultCode === ResultCodes.Success) dispatch(scheduleAction.addScheduleSuccess(data._id, text, date))
+  if (data.resultCode === ResultCodes.Success)
+    dispatch(scheduleAction.addScheduleSuccess(data._id, text, date))
   else console.log(data.message)
 }
 export const deleteSchedule = (_id: string): ScheduleThunk => async dispatch => {
@@ -28,7 +29,7 @@ export const updateScheduleText = (_id: string, text: string): ScheduleThunk => 
   else console.log(data.message)
   dispatch(scheduleAction.toggleScheduleIsLoading(false, _id))
 }
-export const updateScheduleDate = (_id: string, date: any): ScheduleThunk => async dispatch => {
+export const updateScheduleDate = (_id: string, date: Date): ScheduleThunk => async dispatch => {
   dispatch(scheduleAction.toggleScheduleIsLoading(true, _id))
   const data = await schedulesApi.updateScheduleDate(_id, date)
   if (data.resultCode === ResultCodes.Success) dispatch(scheduleAction.updateScheduleDateSuccess(_id, date))

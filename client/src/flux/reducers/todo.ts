@@ -11,8 +11,8 @@ import {
 export const TodoState = {
     todos: [] as Array<TodoType>,
     isFetching: false,
-    completedInProgress: [] as Array<number>,
-    todosIsLoading: [] as Array<number>
+    completedInProgress: [] as Array<string>,
+    todosIsLoading: [] as Array<string>
 }
 
 export default (state = TodoState, action: any): TodoStateType => {

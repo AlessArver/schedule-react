@@ -1,18 +1,19 @@
-import React, { useState } from 'react'
+import React, { FC, useState } from 'react'
 import s from './Schedule.module.css'
 import Preloader from '../../common/Preloader/Preloder'
 import cn from 'classnames'
 import { ScheduleReduxFormDate, ScheduleReduxFormText } from './ScheduleForms'
+import { ScheduleOwnProps, ScheduleUpdateDate, ScheduleUpdateText } from '../../../types/schedule'
 
-const Schedule = ({ schedule, ...props }) => {
-  let [textEdit, textSetEdit] = useState(false)
-  let [dateEdit, dateSetEdit] = useState(false)
+const Schedule: FC<ScheduleOwnProps> = ({schedule, ...props}) => {
+  let [textEdit, textSetEdit] = useState<boolean>(false)
+  let [dateEdit, dateSetEdit] = useState<boolean>(false)
 
-  const onTextSubmit = async data => {
-    await textSetEdit(false)
+  const onTextSubmit = (data: ScheduleUpdateText) => {
+    textSetEdit(false)
     props.updateScheduleText(data._id, data.text)
   }
-  const onDateSubmit = data => {
+  const onDateSubmit = (data: ScheduleUpdateDate) => {
     dateSetEdit(false)
     props.updateScheduleDate(data._id, data.date)
   }
@@ -20,12 +21,10 @@ const Schedule = ({ schedule, ...props }) => {
   const textActivateEdit = () => textSetEdit(true)
   const dateActivateEdit = () => dateSetEdit(true)
 
-  const onDelete = id => props.deleteSchedule(id)
-
-  return props.schedulesIsLoading.some(id => id === schedule._id) && <Preloader/>
+  return props.schedulesIsLoading.some(_id => _id === schedule._id) && <Preloader/>
          || <div className='card'>
            <div className='cardHeader'>
-             <button onClick={() => onDelete(schedule._id)}>
+             <button onClick={() => props.deleteSchedule(schedule._id)}>
                Delete
              </button>
            </div>
@@ -36,7 +35,7 @@ const Schedule = ({ schedule, ...props }) => {
              }
              {!dateEdit
                ? <small onDoubleClick={dateActivateEdit}>{schedule.date}</small>
-               : <ScheduleReduxFormDate initialValues={schedule.date} onSubmit={onDateSubmit}/>
+               : <ScheduleReduxFormDate initialValues={schedule} onSubmit={onDateSubmit}/>
              }
            </div>
          </div>

@@ -19,7 +19,7 @@ type AddScheduleSuccess = {
   readonly type: typeof ADD_SCHEDULE
   _id: string
   text: string
-  date: any
+  date: Date
 }
 type DeleteScheduleSuccess = {
   readonly type: typeof DELETE_SCHEDULE
@@ -33,7 +33,7 @@ type UpdateScheduleTextSuccess = {
 type UpdateScheduleDateSuccess = {
   readonly type: typeof UPDATE_SCHEDULE_DATE
   _id: string
-  date: any
+  date: Date
 }
 type ToggleIsFetching = {
   readonly type: typeof TOGGLE_IS_FETCHING
