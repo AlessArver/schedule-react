@@ -1,28 +1,28 @@
 import { TodoType, UpdateItemBase } from './index'
 
-export type TodoOwnProps = {
+export type ownProps = {
   todo: TodoType
   todosIsLoading: Array<string>
   deleteTodo: (_id: string) => void
   updateTodoText: (_id: string, text: string) => void
 }
 
-export type TodoMapStateToProps = {
+export type mapStateToProps = {
   todos: Array<TodoType>
   todosIsLoading: Array<string>
 }
 
-export type TodoMapDispatchToProps = {
+export type mapDispatchToProps = {
   requestTodos?: () => void
   addTodo: (text: string) => void
   deleteTodo: (_id: string) => void
   updateTodoText: (_id: string, text: string) => void
 }
 
-export type TodoProps = TodoMapStateToProps & TodoMapDispatchToProps
+export type storeProps = mapStateToProps & mapDispatchToProps
 
-export interface TodoFormType extends UpdateItemBase {
+export interface form extends UpdateItemBase {
   text: string
 }
 
-export type TodoFormTypeKeys = Extract<keyof TodoFormType, string>
+export type formKeys = Extract<keyof form, string>

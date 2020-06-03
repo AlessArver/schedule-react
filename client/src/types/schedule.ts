@@ -1,6 +1,6 @@
 import { ScheduleType, UpdateItemBase } from './index'
 
-export type ScheduleOwnProps = {
+export type ownProps = {
   schedule: ScheduleType
   schedulesIsLoading: Array<string>
   deleteSchedule: (_id: string) => void
@@ -8,13 +8,13 @@ export type ScheduleOwnProps = {
   updateScheduleDate: (_id: string, date: Date) => void
 }
 
-export type ScheduleMapStateToProps = {
+export type mapStateToProps = {
   schedules: Array<ScheduleType>
   schedulesIsLoading: Array<string>
 }
 
 
-export type ScheduleMapDispatchToProps = {
+export type mapDispatchToProps = {
   addSchedule: (text: string, date: Date) => void
   requestSchedules?: () => void
   deleteSchedule: (_id: string) => void
@@ -22,14 +22,14 @@ export type ScheduleMapDispatchToProps = {
   updateScheduleDate: (_id: string, date: Date) => void
 }
 
-export type ScheduleProps = ScheduleMapStateToProps & ScheduleMapDispatchToProps
+export type storeProps = mapStateToProps & mapDispatchToProps
 
-export interface ScheduleUpdateText extends UpdateItemBase {
+export interface updateText extends UpdateItemBase {
   text: string
 }
-export interface ScheduleUpdateDate extends UpdateItemBase {
+export interface updateDate extends UpdateItemBase {
   date: Date
 }
 
-export type ScheduleUpdateTextKeys = Extract<keyof ScheduleUpdateText, string>
-export type ScheduleUpdateDateKeys = Extract<keyof ScheduleUpdateDate, string>
+export type updateTextKeys = Extract<keyof updateText, string>
+export type updateDateKeys = Extract<keyof updateDate, string>

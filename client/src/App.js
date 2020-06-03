@@ -1,17 +1,17 @@
 import React, { lazy, Suspense, useEffect } from 'react'
 import { BrowserRouter, Redirect, Route, Switch, withRouter } from 'react-router-dom'
 import './App.css'
-import NavbarContainer from './components/Navbar/NavbarContainer'
+import NavbarContainer from './containers/NavbarContainer'
 import { compose } from 'redux'
 import store from './flux'
-import { initializeApp } from './flux/thunks/app'
 import { connect, Provider } from 'react-redux'
 import Preloader from './components/common/Preloader/Preloder'
+import { initializeApp } from './flux/reducers/app'
 
-const SchedulesContainer = lazy(() => import('./components/Schedules/SchedulesContainer'))
-const TodosContainer = lazy(() => import('./components/Todos/TodosContainer'))
-const SettingsContainer = lazy(() => import('./components/Settings/SettingsContainer'))
-const AuthContainer = lazy(() => import('./components/Auth/AuthContainer'))
+const SchedulesContainer = lazy(() => import('./containers/SchedulesContainer'))
+const TodosContainer = lazy(() => import('./containers/TodosContainer'))
+const SettingsContainer = lazy(() => import('./containers/SettingsContainer'))
+const AuthContainer = lazy(() => import('./containers/AuthContainer'))
 
 const App = props => {
   useEffect(() => props.initializeApp(), [props.initialized])

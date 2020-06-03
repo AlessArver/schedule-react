@@ -3,12 +3,12 @@ import s from './Todo.module.css'
 import Preloader from '../../common/Preloader/Preloder'
 import cn from 'classnames'
 import TodoUpdateReduxForm from './TodoUpdateForm'
-import { TodoOwnProps, TodoFormType } from '../../../types/todo'
+import * as t from '../../../types/todo'
 
-const Todo: FC<TodoOwnProps> = ({todo, ...props}) => {
+const Todo: FC<t.ownProps> = ({todo, ...props}) => {
   let [textEdit, textSetEdit] = useState(false)
 
-  const onTextSubmit = (formData: TodoFormType) => {
+  const onTextSubmit = (formData: t.form) => {
     textSetEdit(false)
     props.updateTodoText(formData._id, formData.text)
   }
@@ -33,5 +33,4 @@ const Todo: FC<TodoOwnProps> = ({todo, ...props}) => {
            </div>
          </div>
 }
-
 export default Todo

@@ -4,11 +4,11 @@ import Schedule from './Schedule/Schedule'
 import { reduxForm } from 'redux-form'
 import ScheduleAddForm from './ScheduleAddForm/ScheduleAddForm'
 import { BaseFormItem } from '../../types'
-import { ScheduleMapDispatchToProps, ScheduleMapStateToProps } from '../../types/schedule'
+import * as s from '../../types/schedule'
 
 const ScheduleReduxForm = reduxForm<BaseFormItem>({form: 'scheduleForm'})(ScheduleAddForm)
 
-const Schedules: FC<ScheduleMapStateToProps & ScheduleMapDispatchToProps> = props => {
+const Schedules: FC<s.storeProps> = props => {
   const onSubmit = (data: BaseFormItem) => props.addSchedule(data.text, data.date)
 
   let schedules = props.schedules.map(schedule => <Schedule

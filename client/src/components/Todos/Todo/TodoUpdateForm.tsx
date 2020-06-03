@@ -2,13 +2,13 @@ import React, { FC } from 'react'
 import { maxLength, required } from '../../../utils/validators'
 import { createField, Input } from '../../common/Forms/Forms'
 import { InjectedFormProps, reduxForm } from 'redux-form'
-import { TodoFormType, TodoFormTypeKeys } from '../../../types/todo'
+import * as  t from '../../../types/todo'
 
 const maxLengthTodo = maxLength(100)
 
-const TodoUpdateForm: FC<InjectedFormProps<TodoFormType>> = ({handleSubmit}) => (
+const TodoUpdateForm: FC<InjectedFormProps<t.form>> = ({handleSubmit}) => (
   <form onSubmit={handleSubmit}>
-    {createField<TodoFormTypeKeys>(
+    {createField<t.formKeys>(
       'text', 'What you\'ll to do?',
       [required, maxLengthTodo], Input,
       {autoFocus: true, onBlur: handleSubmit})}
@@ -16,5 +16,4 @@ const TodoUpdateForm: FC<InjectedFormProps<TodoFormType>> = ({handleSubmit}) => 
   </form>
 )
 
-const TodoUpdateReduxForm = reduxForm<TodoFormType>({form: 'todoUpdateForm'})(TodoUpdateForm)
-export default TodoUpdateReduxForm
+export default reduxForm<t.form>({form: 'todoUpdateForm'})(TodoUpdateForm)

@@ -1,6 +1,5 @@
 import React from 'react'
-import * as s from './SettingsContainer.module.css'
-import Settings from './Settings/Settings'
+import Settings from '../components/Settings/Settings'
 
 class SettingsContainer extends React.Component {
   render() {

@@ -1,19 +1,19 @@
 import React, { FC, useState } from 'react'
-import s from './Schedule.module.css'
+import style from './Schedule.module.css'
 import Preloader from '../../common/Preloader/Preloder'
 import cn from 'classnames'
 import { ScheduleReduxFormDate, ScheduleReduxFormText } from './ScheduleForms'
-import { ScheduleOwnProps, ScheduleUpdateDate, ScheduleUpdateText } from '../../../types/schedule'
+import * as s from '../../../types/schedule'
 
-const Schedule: FC<ScheduleOwnProps> = ({schedule, ...props}) => {
+const Schedule: FC<s.ownProps> = ({schedule, ...props}) => {
   let [textEdit, textSetEdit] = useState<boolean>(false)
   let [dateEdit, dateSetEdit] = useState<boolean>(false)
 
-  const onTextSubmit = (data: ScheduleUpdateText) => {
+  const onTextSubmit = (data: s.updateText) => {
     textSetEdit(false)
     props.updateScheduleText(data._id, data.text)
   }
-  const onDateSubmit = (data: ScheduleUpdateDate) => {
+  const onDateSubmit = (data: s.updateDate) => {
     dateSetEdit(false)
     props.updateScheduleDate(data._id, data.date)
   }
@@ -28,7 +28,7 @@ const Schedule: FC<ScheduleOwnProps> = ({schedule, ...props}) => {
                Delete
              </button>
            </div>
-           <div className={cn(s.cardContent, 'cardContent')}>
+           <div className={cn(style.cardContent, 'cardContent')}>
              {!textEdit
                ? <p onDoubleClick={textActivateEdit}>{schedule.text}</p>
                : <ScheduleReduxFormText initialValues={schedule} onSubmit={onTextSubmit}/>
