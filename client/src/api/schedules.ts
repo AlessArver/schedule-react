@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { BaseResponseAPI, GetIdAPI, ScheduleGetAPI, SchedulesGetAPI } from '../types/api'
+import * as api from '../types/api'
 
 const instance = axios.create({
   baseURL: 'http://localhost:3000/api/schedules/',
@@ -9,36 +9,35 @@ const instance = axios.create({
   }
 })
 
-const schedulesApi = {
+export default {
   getSchedlues() {
     return instance
-      .get<SchedulesGetAPI>('/')
+      .get<api.SchedulesGetAPI>('/')
       .then(res => res.data)
   },
   getSchedule(id: string) {
     return instance
-      .get<ScheduleGetAPI>(`:${id}`)
+      .get<api.ScheduleGetAPI>(`:${id}`)
       .then(res => res.data)
   },
   createSchedule(text: string, date: Date) {
     return instance
-      .post<GetIdAPI>('create', {text, date})
+      .post<api.GetIdAPI>('create', {text, date})
       .then(res => res.data)
   },
   updateScheduleText(id: string, text: string) {
     return instance
-      .put<BaseResponseAPI>(`update-text/${id}`, {text})
+      .put<api.BaseResponseAPI>(`update-text/${id}`, {text})
       .then(res => res.data)
   },
   updateScheduleDate(id: string, date: Date) {
     return instance
-      .put<BaseResponseAPI>(`update-date/${id}`, {date})
+      .put<api.BaseResponseAPI>(`update-date/${id}`, {date})
       .then(res => res.data)
   },
   deleteSchedule(id: string) {
     return instance
-      .delete<BaseResponseAPI>(`delete/${id}`)
+      .delete<api.BaseResponseAPI>(`delete/${id}`)
       .then(res => res.data)
   }
 }
-export default schedulesApi

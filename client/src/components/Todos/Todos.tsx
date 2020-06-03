@@ -5,7 +5,7 @@ import * as t from '../../types/todo'
 import TodoCreateReduxForm from './TodoCreateForm/TodoCreateForm'
 
 const Todos: FC<t.storeProps> = props => {
-  const onSubmit = (data: t.formType) => props.addTodo(data.text)
+  const onSubmit = (data: t.form) => props.addTodo(data.text)
 
   let todos = props.todos.map(todo => <Todo
     todo={todo}
