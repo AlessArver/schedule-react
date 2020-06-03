@@ -1,18 +1,28 @@
-import { AppStateType, INITIALIZED_SUCCESS } from '../../types/redux/app'
+import appActions from '../actions/app'
+import { InferActionsTypes, ThunkType } from '../index'
+import { getAuthUser } from './auth'
 
-export const AppState = {
-    initialized: false
+const initialState = {
+  initialized: false
 }
+type State = typeof initialState
+type Actions = InferActionsTypes<typeof appActions>
+type T = ThunkType<Actions>
 
-const app = (state = AppState, action: any): AppStateType => {
-    switch (action.type) {
-        case INITIALIZED_SUCCESS:
-            return {
-                ...state,
-                initialized: true
-            }
-        default:
-            return state
-    }
+const app = (state = initialState, action: Actions): State => {
+  switch (action.type) {
+    case 'INITIALIZED_SUCCESS':
+      return {
+        ...state,
+        initialized: true
+      }
+    default:
+      return state
+  }
 }
 export default app
+
+export const initializeApp = () => (dispatch: any) => {
+  dispatch(getAuthUser())
+    .then(() => dispatch(appActions.initializedSuccess()))
+}

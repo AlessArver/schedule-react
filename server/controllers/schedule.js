@@ -2,7 +2,6 @@ const Schedule = require('../models/schedule')
 
 exports.getSchedules = (req, res) => {
   try {
-    console.log(req.user)
     Schedule.find({ owner: req.user.userId }, (err, schedules) => {
       res.json({ resultCode: 0, schedules, message: 'Schedules is received' })
     })

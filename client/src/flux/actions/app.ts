@@ -1,3 +1,3 @@
-import { AppAction, INITIALIZED_SUCCESS } from '../../types/redux/app'
-
-export const initializedSuccess = (): AppAction => ({type: INITIALIZED_SUCCESS})
+export default {
+  initializedSuccess: () => ({type: 'INITIALIZED_SUCCESS'} as const)
+}

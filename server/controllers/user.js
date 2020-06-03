@@ -34,9 +34,7 @@ exports.login = async (req, res) => {
 
     const isMatch = await bcrypt.compare(password, user.password)
     if (!email || !isMatch)
-      return res
-        // .status(400)
-        .json({ resultCode: 1, message: 'Введите почту и пароль для входа' })
+      return res.json({ resultCode: 1, message: 'Введите почту и пароль для входа' })
 
     const token = await jwt.sign(
       { userId: user.id },
@@ -54,8 +52,8 @@ exports.login = async (req, res) => {
 exports.getUser = (req, res) => {
   try {
     User.findById(req.params.id, (e, user) => {
-      if (e)     res.json({ resultCode: 1, message: 'Что-то пошло не так. Попробуйте снова.', e: e })
-      else res.json({ resultCode: 0, user, message: 'User received' })
+      e ? res.json({ resultCode: 1, message: 'Что-то пошло не так. Попробуйте снова.', e: e })
+        : res.json({ resultCode: 0, user, message: 'User received' })
     })
   } catch (e) {
     res.json({ resultCode: 1, message: 'Что-то пошло не так. Попробуйте снова.', e: e })
@@ -68,9 +66,9 @@ exports.getAuthUser = async (req, res) => {
     const decoded = jwt.verify(token, 'secret')
     let user = decoded
 
-    User.findById(user.userId, (err, user) => {
-      err ? res.json({ resultCode: 1, message: 'Нет авторизации' })
-        : res.json({ resultCode: 0, token: req.token, user })
+    User.findById(user.userId, (e, user) => {
+      e ? res.json({ resultCode: 1, message: 'Нет авторизации' })
+        : res.json({ resultCode: 0, token: req.token, user, message: 'Received your data' })
     })
   } catch (e) {
     res.json({ resultCode: 1, message: 'Что-то пошло не так. Попробуйте снова.', e: e })
@@ -88,16 +86,16 @@ exports.updateUser = (req, res) => {
   User.findByIdAndUpdate(
     req.params.id,
     user,
-    (err, user) => {
-      if (err) throw err
-      else res.json({ message: 'user is updated' })
+    (e, user) => {
+      e ? res.json({ resultCode: 1, message: 'Что-то пошло не так. Попробуйте снова.', e: e })
+        : res.json({ resultCode: 0, message: 'user is updated' })
     }
   )
 }
 
 exports.logout = (req, res) => {
-  User.findByIdAndDelete(req.params.id, err => {
-    if (err) throw err
-    else res.json({ message: 'user is deleted' })
+  User.findByIdAndDelete(req.params.id, e => {
+    e ? res.json({ resultCode: 1, message: 'Что-то пошло не так. Попробуйте снова.', e: e })
+      : res.json({ resultCode: 0, message: 'user is deleted' })
   })
 }

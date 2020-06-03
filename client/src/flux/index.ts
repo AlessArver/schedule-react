@@ -1,8 +1,8 @@
-import { applyMiddleware, combineReducers, compose, createStore } from 'redux'
+import { Action, applyMiddleware, combineReducers, compose, createStore } from 'redux'
 import scheduleReducer from "./reducers/schedule";
 import todo from "./reducers/todo";
 import authReducder from "./reducers/auth";
-import thunk from "redux-thunk";
+import thunk, { ThunkAction } from 'redux-thunk'
 import {reducer as formReducer} from 'redux-form'
 import app from "./reducers/app";
 
@@ -15,6 +15,8 @@ const rootReducer = combineReducers({
 })
 type RootReducerType = typeof rootReducer
 export type RootState = ReturnType<RootReducerType>
+export type InferActionsTypes<T> = T extends { [key: string]: (...args: any[]) => infer U } ? U : never
+export type ThunkType<A extends Action, R = Promise<void>> = ThunkAction<R, RootState, unknown, A>
 
 // @ts-ignore
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose

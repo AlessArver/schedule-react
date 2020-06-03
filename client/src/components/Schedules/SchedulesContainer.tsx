@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import {
   addSchedule,
   deleteSchedule,
-  requestSchedules,
   updateScheduleDate,
   updateScheduleText
 } from '../../flux/thunks/schedule'
@@ -13,6 +12,7 @@ import { compose } from 'redux'
 import { getSchedules, getSchedulesIsLoading } from '../../selectors/schedule'
 import { RootState } from '../../flux'
 import { ScheduleMapStateToProps, ScheduleProps } from '../../types/schedule'
+import { requestSchedules } from '../../flux/reducers/schedule'
 
 class SchedulesAPIContainer extends React.Component<ScheduleProps> {
   componentDidMount() {
