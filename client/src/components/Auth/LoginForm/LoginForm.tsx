@@ -15,7 +15,7 @@ const LoginForm: FC<InjectedFormProps<BaseAuthForm>> = ({handleSubmit}) => {
         [required, minLengthEmail, maxLengthField], Input, {type: 'email'})}
       {createField<LoginFormKeys>('password', 'password',
         [required, minLengthPassword, maxLengthField], Input, {type: 'password'})}
-      <button type='submit'>Login</button>
+      <button className='btn btn-secondary mt-2' type='submit'>Login</button>
     </form>
   )
 }

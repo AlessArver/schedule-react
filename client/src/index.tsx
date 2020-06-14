@@ -2,6 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import * as serviceWorker from './serviceWorker'
 import MainApp from './App'
+import 'bootstrap/dist/css/bootstrap.css';
 
 ReactDOM.render(<MainApp/>, document.getElementById('root'))
 

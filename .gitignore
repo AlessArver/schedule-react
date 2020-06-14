@@ -1,3 +1,14 @@
 /.git
 
 /.idea
+
+/node_modules
+
+/dist
+
+package-lock.json
+yarn.lock
+
+debug.log
+
+.env

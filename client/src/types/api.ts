@@ -1,4 +1,4 @@
-import { ScheduleType, TodoType, UserType } from './index'
+import { TodoType, UserType } from './index'
 
 export enum ResultCodes {
   Success = 0,
@@ -18,19 +18,14 @@ export interface GetIdAPI extends BaseResponseAPI {
   _id: string
 }
 
-export interface SchedulesGetAPI extends BaseResponseAPI {
-  schedules: Array<ScheduleType>
-}
 export interface TodosGetAPI extends BaseResponseAPI {
   todos: Array<TodoType>
 }
 
-export interface ScheduleGetAPI extends BaseResponseAPI {
-  schedule: ScheduleType
-}
 export interface TodoGetAPI extends BaseResponseAPI {
   todo: TodoType
 }
+
 export interface UserGetAPI extends BaseResponseAPI {
   user: UserType
   token: string

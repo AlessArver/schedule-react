@@ -4,6 +4,11 @@ import * as controller from '../controllers/user'
 
 const router = express.Router()
 
+router.get('/a', (req: any, res: Response) => {
+  res.json({message: 'awdefde'})
+  console.log('adsads')
+})
+
 router.post('/register',
   [
     check('email', 'Введите корректный email').isEmail(),

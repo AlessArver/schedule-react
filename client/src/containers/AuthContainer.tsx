@@ -14,7 +14,7 @@ const AuthContainer: FC<AuthMapStateToProps & AuthMapDispatchToProps> = props =>
 
   const login = (email: string, password: string) => props.login(email, password)
 
-  if (props.loggedIn) return <Redirect to='/schedules'/>
+  if (props.loggedIn) return <Redirect to='/todos'/>
 
   return <Auth login={login} register={register}/>
 }

@@ -11,10 +11,10 @@ const Form: FC<WrappedFieldProps & FormType> = ({input, meta, el, ...props}) => 
   const showError = meta.touched && meta.error
   // className={`${s.form} ${showError ? s.error : ''}`}
   return (
-    <div>
+    <>
       {React.createElement(el, {...input, ...props})}
-      {showError && <small>{meta.error}</small>}
-    </div>
+      {showError && <small className='invalid-feedback'>{meta.error}</small>}
+    </>
   )
 }
 
@@ -33,6 +33,7 @@ export const createField = <Keys extends string>(name: Keys,
       placeholder={placeholder}
       validate={validators}
       component={component}
+      className='form-control mb-2'
       {...props}
     /> {text}
   </>

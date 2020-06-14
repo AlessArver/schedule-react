@@ -1,5 +1,7 @@
-import React from "react";
-import preloder from "../../../assets/images/preloader.svg";
+import React from 'react'
 
-const Preloader = () => <img src={preloder} alt="preloder"/>
-export default Preloader
+export default () => <div className='d-flex justify-content-center'>
+  <div className='spinner-border text-primary' role='status'>
+    <span className='sr-only'>Loading...</span>
+  </div>
+</div>

@@ -1,28 +1,35 @@
+require('dotenv').config()
+import { createServer } from 'http'
 import express from 'express'
 import cookieParser from 'cookie-parser'
 import bodyParser from 'body-parser'
 import mongoose from 'mongoose'
 
-import userRouters from './routes/user'
-import scheduleRouters from './routes/schedule'
-import todoRouters from './routes/todo'
+import { TodoRouters, UserRouters } from './routes'
+import { auth } from './middleware/auth'
 
-const PORT = 5000
+const PORT = process.env.PORT || 5000
+
+import createSocket from './core/socket'
+
 const app = express()
+const server = createServer(app)
+const io = createSocket(server)
 
-app.use(bodyParser.urlencoded({ extended: true }))
+app.use(bodyParser.urlencoded({extended: true}))
 app.use(bodyParser.json())
 
 app.use(cookieParser())
 
-app.use('/api/users', userRouters)
-app.use('/api/todos', scheduleRouters)
-app.use('/api/users', todoRouters)
+app.use('/api/user', UserRouters)
+//app.use('/api/todos', auth, () => todoRouters(app, io))
+TodoRouters(app, io)
+//
 
 const start = async () => {
   try {
     await mongoose.connect(
-      'mongodb+srv://admin:12345@cluster0-7s2go.mongodb.net/schedules',
+      process.env.DB_CONN,
       {
         useNewUrlParser: true,
         useFindAndModify: true,
@@ -30,7 +37,7 @@ const start = async () => {
         useCreateIndex: true
       }
     )
-    app.listen(PORT, () => console.log(`Server started on port: ${PORT}`))
+    server.listen(PORT, () => console.log(`Server started on port: ${PORT}`))
   } catch (e) {
     console.log(e)
   }

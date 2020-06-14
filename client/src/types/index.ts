@@ -5,7 +5,7 @@ interface Item {
 }
 
 export interface ScheduleType extends Item {
-  date: Date
+  createdAt: any
 }
 
 export interface TodoType extends Item {
@@ -19,8 +19,6 @@ export type UserType = {
   surname: string
   email: string
   password: string
-  schedules: Array<ScheduleType>
-  todos: Array<TodoType>
 }
 
 export type ValidatorType = (value: string) => string | undefined
@@ -29,6 +27,7 @@ export type BaseFormItem = {
   text: string
   date: Date
 }
+export type BaseFormItemKeys = keyof BaseFormItem
 
 export interface UpdateItemBase {
   date: Date

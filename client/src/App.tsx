@@ -9,7 +9,6 @@ import Preloader from './components/common/Preloader/Preloder'
 import { initializeApp } from './flux/reducers/app'
 import * as A from './types/app'
 
-const SchedulesContainer = lazy(() => import('./containers/SchedulesContainer'))
 const TodosContainer = lazy(() => import('./containers/TodosContainer'))
 const SettingsContainer = lazy(() => import('./containers/SettingsContainer'))
 const AuthContainer = lazy(() => import('./containers/AuthContainer'))
@@ -19,21 +18,26 @@ const App: FC<A.storeProps> = props => {
 
   if (props.initialized)
     return (
-      <div className='app-wrapper'>
+      <>
         <NavbarContainer/>
-        <div className='app-wrapper-content'>
-          <Suspense fallback={<Preloader/>}>
-            <Switch>
-              <Route exact path='/' render={() => <Redirect to='/schedules'/>}/>
-              <Route path='/schedules' render={() => <SchedulesContainer/>}/>
-              <Route path='/todos' render={() => <TodosContainer/>}/>
-              <Route path='/settings' render={() => <SettingsContainer/>}/>
-              <Route path='/auth' render={() => <AuthContainer/>}/>
-              <Route path='*' render={() => <>404 Not Found</>}/>
-            </Switch>
-          </Suspense>
+        <div className='container'>
+          <div className='row'>
+            <div className='col'></div>
+            <div className='col'>
+              <Suspense fallback={<Preloader/>}>
+                <Switch>
+                  <Route exact path='/' render={() => <Redirect to='/todos'/>}/>
+                  <Route path='/todos' render={() => <TodosContainer/>}/>
+                  <Route path='/settings' render={() => <SettingsContainer/>}/>
+                  <Route path='/auth' render={() => <AuthContainer/>}/>
+                  <Route path='*' render={() => <>404 Not Found</>}/>
+                </Switch>
+              </Suspense>
+            </div>
+            <div className='col'></div>
+          </div>
         </div>
-      </div>
+      </>
     )
   else return <Preloader/>
 }

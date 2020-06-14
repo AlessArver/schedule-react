@@ -10,8 +10,8 @@ const maxLengthField = maxLength(100)
 const TodoCreateForm: FC<InjectedFormProps<t.form>> = ({handleSubmit}) => (
   <form onSubmit={handleSubmit} className='form'>
     {createField<t.formKeys>('text', 'What you\'ll to do?',
-      [required, maxLengthField], Input)}
-    <button>Submit</button>
+      [required, maxLengthField], Input, {})}
+    <button className='btn btn-secondary'>Create</button>
   </form>
 )
 

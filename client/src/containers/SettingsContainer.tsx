@@ -1,10 +1,16 @@
-import React from 'react'
+import React, { FC } from 'react'
 import Settings from '../components/Settings/Settings'
+import { RootState } from '../flux'
+import { connect } from 'react-redux'
+import { getUser } from '../selectors/auth'
+import { IsAuth } from '../types/isAuth'
 
-class SettingsContainer extends React.Component {
-  render() {
-    return <Settings/>
-  }
+const SettingsContainer: FC<IsAuth> = props => {
+  return <Settings user={props.user}/>
 }
 
-export default SettingsContainer
+const maStateToProps = (state: RootState): IsAuth => ({
+  user: getUser(state)
+})
+
+export default connect(maStateToProps)(SettingsContainer)

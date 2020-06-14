@@ -1,18 +1,22 @@
 import express from 'express'
-import * as controller from '../controllers/todo'
+import socket from 'socket.io'
+import { TodoController } from '../controllers'
+import { auth } from '../middleware/auth'
 
 const router = express.Router()
 
-router.get('/', controller.getTodos)
+export default (app: express.Express, io: socket.Server) => {
+  const controller = new TodoController(io)
 
-router.get('/:id', controller.getTodo)
+  app.get('/api/todos', auth, controller.getTodos)
 
-router.post('/create', controller.createTodo)
+  app.get('/api/todos/:id', auth, controller.getTodo)
 
-router.put('/isCompleted/:id', controller.completeTodo)
+  app.post('/api/todos/create', auth, controller.createTodo)
 
-router.put('/update-text/:id', controller.updateTodo)
+  app.put('/api/todos/isCompleted/:id', auth, controller.completeTodo)
 
-router.delete('/delete/:id', controller.deleteTodo)
+  app.put('/api/todos/update-text/:id', auth, controller.updateTodo)
 
-export default router
+  app.delete('/api/todos/delete/:id', auth, controller.deleteTodo)
+}

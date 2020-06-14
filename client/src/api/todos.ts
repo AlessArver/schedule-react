@@ -10,9 +10,9 @@ const instance = axios.create({
 })
 
 export default {
-  getTodos() {
+  getTodos(page: any) {
     return instance
-      .get<api.TodosGetAPI>('/')
+      .get<api.TodosGetAPI>(`?currentPage=${page}`)
       .then(res => res.data)
   },
   getTodo(_id: string) {

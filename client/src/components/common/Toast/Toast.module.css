@@ -1,0 +1,10 @@
+.toastWrapper {
+    min-height: 200px;
+    position: relative;
+}
+
+.toast {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}

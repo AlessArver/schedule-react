@@ -1,5 +1,4 @@
-import mongoose, { model, Schema, Types } from 'mongoose'
-import { ScheduleDocument } from './Schedule'
+import mongoose, { model, Schema } from 'mongoose'
 import { TodoDocument } from './Todo'
 
 export type UserDocument = mongoose.Document & {
@@ -10,7 +9,6 @@ export type UserDocument = mongoose.Document & {
   twitter: string,
   google: string,
   password: string,
-  schedules: Array<ScheduleDocument>,
   todos: Array<TodoDocument>,
 };
 
@@ -22,7 +20,6 @@ const schema = new Schema({
   twitter: String,
   google: String,
   password: {type: String, required: true},
-  schedules: [{type: Schema.Types.ObjectId, ref: 'Schedule'}],
   todos: [{type: Schema.Types.ObjectId, ref: 'Todo'}]
 }, {timestamps: true})
 

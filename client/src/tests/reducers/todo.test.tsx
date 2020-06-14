@@ -13,7 +13,7 @@ const state = {
 
 it('todo should be added in todos', () => {
   const text = 'Eat sushi'
-  const action = action.addTodo(text)
+  const action = action.addTodoSuccess(text)
   const newState = reducer(state, action)
   expect(newState.todos.length).toBe(4)
   expect(newState.todos[3].text).toBe(text)
@@ -21,7 +21,7 @@ it('todo should be added in todos', () => {
 
 it('text in todo should be updated', () => {
   const text = 'To rent an apartment'
-  const action = action.setTodoText(1, text)
+  const action = action.updateTodoTextSuccess(1, text)
   const newState = reducer(state, action)
   expect(newState.todos[0].text).toBe(text)
 })

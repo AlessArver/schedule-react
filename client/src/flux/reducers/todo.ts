@@ -2,23 +2,23 @@ import { TodoType } from '../../types'
 import todosApi from '../../api/todos'
 import { ResultCodes } from '../../types/api'
 import todoActions from '../actions/todo'
+import loaderActions from '../actions/loader'
 import { InferActionsTypes, ThunkType } from '../index'
+import { FormAction, reset } from 'redux-form'
 
 const initialState = {
   todos: [] as Array<TodoType>,
-  isFetching: false,
-  completedInProgress: [] as Array<string>,
-  todosIsLoading: [] as Array<string>
+  completedInProgress: [] as Array<string>
 }
 type State = typeof initialState
-type Actions = InferActionsTypes<typeof todoActions>
-type T = ThunkType<Actions>
+type Actions = InferActionsTypes<typeof todoActions & typeof loaderActions>
+type T = ThunkType<Actions | FormAction>
 
 export default (state = initialState, action: Actions): State => {
   switch (action.type) {
-    case 'SET_TODOS':
+    case 'TODO/SET_TODOS':
       return {...state, todos: action.todos}
-    case 'ADD_TODO':
+    case 'TODO/ADD_TODO':
       return {
         ...state,
         todos: [
@@ -26,17 +26,17 @@ export default (state = initialState, action: Actions): State => {
           {_id: action._id, text: action.text, isCompleted: false, createdAt: action.createdAt}
         ]
       }
-    case 'DELETE_TODO':
+    case 'TODO/DELETE_TODO':
       return {...state, todos: state.todos.filter(t => t._id !== action._id)}
-    case 'UPDATE_TODO_TEXT':
+    case 'TODO/UPDATE_TODO_TEXT':
       return {
         ...state,
-        todos: state.todos.filter(t => {
+        todos: state.todos.map(t => {
           if (t._id === action._id) return {...t, text: action.text}
           return t
         })
       }
-    case 'TOGGLE_IS_COMPLETED_TODO':
+    case 'TODO/TOGGLE_IS_COMPLETED_TODO':
       return {
         ...state,
         todos: state.todos.filter(t => {
@@ -45,43 +45,35 @@ export default (state = initialState, action: Actions): State => {
           return t
         })
       }
-    case 'TOGGLE_TODO_IS_LOADING':
-      return {
-        ...state,
-        todosIsLoading: action.todoIsLoading
-          ? [...state.todosIsLoading, action._id]
-          : state.todosIsLoading.filter(_id => _id !== action._id)
-      }
     default:
       return state
   }
 }
 
-export const requestTodos = (): T => async dispatch => {
-  dispatch(todoActions.toggleIsFetching(true))
-  const data = await todosApi.getTodos()
+export const requestTodos = (page: Date): T => async dispatch => {
+  dispatch(loaderActions.toggleIsLoading(true))
+  const data = await todosApi.getTodos(page)
+  dispatch(loaderActions.toggleIsLoading(false))
   dispatch(todoActions.setTodos(data.todos))
-  dispatch(todoActions.toggleIsFetching(false))
 }
 export const addTodo = (text: string): T => async dispatch => {
   const data: any = await todosApi.createTodo(text)
-  if (data.resultCode === ResultCodes.Success)
-    dispatch(todoActions.addTodoSuccess(data._id, text, data.createdAt))
-  else console.log(data.message)
+  if (data.resultCode === ResultCodes.Success) {
+    dispatch(reset('todoForm'))
+  } else console.log(data.message)
 }
 export const deleteTodo = (_id: string): T => async dispatch => {
-  dispatch(todoActions.toggleTodoIsLoading(true, _id))
+  dispatch(loaderActions.toggleItemsIsLoading(true, _id))
   const data = await todosApi.deleteTodo(_id)
   if (data.resultCode === ResultCodes.Success)
     dispatch(todoActions.deleteTodoSuccess(_id))
   else console.log(data.message)
-  dispatch(todoActions.toggleTodoIsLoading(false, _id))
+  dispatch(loaderActions.toggleItemsIsLoading(false, _id))
 }
 export const updateTodoText = (_id: string, text: string): T => async dispatch => {
-  dispatch(todoActions.toggleTodoIsLoading(true, _id))
+  dispatch(loaderActions.toggleItemsIsLoading(true, _id))
   const data = await todosApi.updateTodoText(_id, text)
-  if (data.resultCode === ResultCodes.Success)
-    dispatch(todoActions.updateTodoTextSuccess(_id, text))
-  else console.log(data.message)
-  dispatch(todoActions.toggleTodoIsLoading(false, _id))
+  if (data.resultCode === ResultCodes.Error)
+    console.log(data.message)
+  dispatch(loaderActions.toggleItemsIsLoading(false, _id))
 }
