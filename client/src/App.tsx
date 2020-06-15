@@ -5,7 +5,7 @@ import NavbarContainer from './containers/NavbarContainer'
 import { compose } from 'redux'
 import store, { RootState } from './flux'
 import { connect, Provider } from 'react-redux'
-import Preloader from './components/common/Preloader/Preloder'
+import Preloader from './components/Preloader/Preloder'
 import { initializeApp } from './flux/reducers/app'
 import * as A from './types/app'
 
@@ -21,21 +21,15 @@ const App: FC<A.storeProps> = props => {
       <>
         <NavbarContainer/>
         <div className='container'>
-          <div className='row'>
-            <div className='col'></div>
-            <div className='col'>
-              <Suspense fallback={<Preloader/>}>
-                <Switch>
-                  <Route exact path='/' render={() => <Redirect to='/todos'/>}/>
-                  <Route path='/todos' render={() => <TodosContainer/>}/>
-                  <Route path='/settings' render={() => <SettingsContainer/>}/>
-                  <Route path='/auth' render={() => <AuthContainer/>}/>
-                  <Route path='*' render={() => <>404 Not Found</>}/>
-                </Switch>
-              </Suspense>
-            </div>
-            <div className='col'></div>
-          </div>
+          <Suspense fallback={<Preloader/>}>
+            <Switch>
+              <Route exact path='/' render={() => <Redirect to='/todos'/>}/>
+              <Route path='/todos' render={() => <TodosContainer/>}/>
+              <Route path='/settings' render={() => <SettingsContainer/>}/>
+              <Route path='/auth' render={() => <AuthContainer/>}/>
+              <Route path='*' render={() => <>404 Not Found</>}/>
+            </Switch>
+          </Suspense>
         </div>
       </>
     )

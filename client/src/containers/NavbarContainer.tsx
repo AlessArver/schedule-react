@@ -1,5 +1,5 @@
 import React, { ComponentType, FC } from 'react'
-import Navbar from '../components/Navbar/Navbar'
+import { NavBar } from '../components/'
 import { connect } from 'react-redux'
 import { getLoggedIn } from '../selectors/auth'
 import { RootState } from '../flux'
@@ -11,7 +11,7 @@ type PropsType = {
 }
 
 const NavBarContainer: FC<PropsType> = ({loggedIn}) => {
-  return <Navbar loggedIn={loggedIn}/>
+  return <NavBar loggedIn={loggedIn}/>
 }
 
 const mapStateToProps = (state: RootState): PropsType => ({

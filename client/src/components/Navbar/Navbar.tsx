@@ -1,5 +1,6 @@
 import React, { FC } from 'react'
-import s from './Navbar.module.css'
+
+import './Navbar.sass'
 import { NavLink } from 'react-router-dom'
 
 type l = {
@@ -12,11 +13,14 @@ const NavBar: FC<l> = ({loggedIn}) => (
       {loggedIn
        && <>
          <li className='nav-item'>
-           <NavLink to='/todos' className='nav-link' activeClassName={s.active}>Todos</NavLink>
+           <NavLink to='/todos' className='nav-link' activeClassName='nav-link_active'>Тодо</NavLink>
          </li>
          <li className='nav-item'>
-           <NavLink to='/settings' className='nav-link' activeClassName={s.active}>Settings</NavLink>
+           <NavLink to='/settings' className='nav-link' activeClassName='nav-link_active'>Настройки</NavLink>
          </li>
+        <li>
+          <a className='nav-link'>Выйти</a>
+        </li>
        </>}
     </ul>
   </nav>
