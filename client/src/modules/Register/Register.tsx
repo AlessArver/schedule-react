@@ -5,15 +5,15 @@ import { IRegisterForm } from '../../types/auth'
 import './Register.sass'
 import { Button, Card } from '../../components'
 import RegisterForm from './RegisterForm/RegisterForm'
+import { NavLink } from 'react-router-dom'
 
 const RegisterReduxForm = reduxForm<IRegisterForm>({form: 'register'})(RegisterForm)
 
 type RegisterCardProps = {
   register: (name: string, surname: string, email: string, password: string) => void
-  setRegister: (register: boolean) => void
 }
 
-const Register: FC<RegisterCardProps> = ({register, setRegister}) => {
+const Register: FC<RegisterCardProps> = ({register}) => {
   const registerOnSubmit = (formData: IRegisterForm) =>
     register(formData.name, formData.surname, formData.email, formData.password)
 
@@ -24,7 +24,7 @@ const Register: FC<RegisterCardProps> = ({register, setRegister}) => {
         <RegisterReduxForm onSubmit={registerOnSubmit}/>
       </div>
     </Card>
-    <Button onClick={() => setRegister(false)} className='btn btn-link'>Войти</Button>
+    <NavLink to='/login' className='btn-link'>Войти</NavLink>
   </div>
 }
 export default Register

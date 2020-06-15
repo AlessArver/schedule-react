@@ -2,13 +2,13 @@ import mongoose, { model, Schema } from 'mongoose'
 import { TodoDocument } from './Todo'
 
 export type UserDocument = mongoose.Document & {
-  name: string,
-  surname: string,
-  email: string,
-  facebook: string,
-  twitter: string,
-  google: string,
-  password: string,
+  name: { type: string, required: boolean }
+  surname: { type: string, required: boolean }
+  email: { type: string, unique: boolean, required: boolean }
+  facebook: string
+  twitter: string
+  google: string
+  password: string
   todos: Array<TodoDocument>,
 };
 

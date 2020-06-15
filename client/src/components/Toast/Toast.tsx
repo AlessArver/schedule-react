@@ -1,19 +1,17 @@
 import React, { FC } from 'react'
-import s from './Toast.module.css'
+import classNames from 'classnames'
 
-type ToastProps = {
-  text: string
-}
+import './Toast.sass'
+import { ToastState } from '../../flux/reducers/toast'
 
-const Toast: FC<ToastProps> = ({text}) => {
-  return <>
-    <div aria-live='polite' aria-atomic='true' className={s.toastWrapper}>
-      <div className={`toast ${s.toast}`}>
-        <div className='toast-body'>
-          {text}
-        </div>
-      </div>
+const Toast: FC<ToastState> = ({isToast, toastType, text}) => {
+  return <div
+    aria-live='polite'
+    aria-atomic='true'
+    className={classNames('toast', {'show': isToast, 'hide': !isToast}, toastType)}>
+    <div className='toast-body'>
+      {text}
     </div>
-  </>
+  </div>
 }
 export default Toast

@@ -1,4 +1,6 @@
+export { default as NavBar } from './Navbar/Navbar'
 export { default as Button } from './Button/Button'
 export { default as Card } from './Card/Card'
 export { default as InputField } from './InputField/InputField'
-export { default as NavBar } from './Navbar/Navbar'
+export { default as Toast } from './Toast/Toast'
+export { default as Footer } from './Footer/Footer'

@@ -5,6 +5,7 @@ import todoActions from '../actions/todo'
 import loaderActions from '../actions/loader'
 import { InferActionsTypes, ThunkType } from '../index'
 import { FormAction, reset } from 'redux-form'
+import toastActions from '../actions/toast'
 
 const initialState = {
   todos: [] as Array<TodoType>,
@@ -60,20 +61,22 @@ export const addTodo = (text: string): T => async dispatch => {
   const data: any = await todosApi.createTodo(text)
   if (data.resultCode === ResultCodes.Success) {
     dispatch(reset('todoForm'))
-  } else console.log(data.message)
+    dispatch(toastActions.setToast(true, 'toast-success', data.message))
+  } else dispatch(toastActions.setToast(true, 'toast-danger', data.message))
 }
 export const deleteTodo = (_id: string): T => async dispatch => {
   dispatch(loaderActions.toggleItemsIsLoading(true, _id))
   const data = await todosApi.deleteTodo(_id)
-  if (data.resultCode === ResultCodes.Success)
+  if (data.resultCode === ResultCodes.Success) {
     dispatch(todoActions.deleteTodoSuccess(_id))
-  else console.log(data.message)
+    dispatch(toastActions.setToast(true, 'toast-success', data.message))
+  } else dispatch(toastActions.setToast(true, 'toast-danger', data.message))
   dispatch(loaderActions.toggleItemsIsLoading(false, _id))
 }
 export const updateTodoText = (_id: string, text: string): T => async dispatch => {
   dispatch(loaderActions.toggleItemsIsLoading(true, _id))
   const data = await todosApi.updateTodoText(_id, text)
   if (data.resultCode === ResultCodes.Error)
-    console.log(data.message)
+    dispatch(toastActions.setToast(true, 'toast-success', data.message))
   dispatch(loaderActions.toggleItemsIsLoading(false, _id))
 }

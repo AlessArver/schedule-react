@@ -38,10 +38,10 @@ export const login = async (req: Request, res: Response) => {
     if (!email || !isMatch)
       return res.json({resultCode: 1, message: 'Введите почту и пароль для входа'})
 
-    const token = await jwt.sign(
+    const token = jwt.sign(
       {userId: user.id},
-      process.env.JWT_SECRET,
-      {expiresIn: process.env.JWT_MAX_AGE}
+      'jhkl4ew990GK93hjGHJ',
+      {expiresIn: 10080}
     )
     res
       .cookie('userToken', token)
@@ -65,7 +65,7 @@ export const getUser = (req: Request, res: Response) => {
 export const getAuthUser = async (req: any, res: Response) => {
   try {
     const token = req.cookies['userToken']
-    const decoded = jwt.verify(token, 'secret')
+    const decoded = jwt.verify(token, 'jhkl4ew990GK93hjGHJ')
     let user: any = decoded
 
     UserModel.findById(user.userId, (e, user: UserDocument) => {

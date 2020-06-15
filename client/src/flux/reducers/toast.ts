@@ -1,17 +1,23 @@
 import { InferActionsTypes } from '../index'
-import toastActions from '../actions/alert'
+import toastActions from '../actions/toast'
 
 const initialState = {
   isToast: false,
+  toastType: '',
   text: ''
 }
-type State = typeof initialState
+export type ToastState = typeof initialState
 type Actions = InferActionsTypes<typeof toastActions>
 
-export default (state = initialState, action: Actions): State => {
+export default (state = initialState, action: Actions): ToastState => {
   switch (action.type) {
-    case 'TOAST/TOGGLE_SHOW_TOAST':
-      return {...state, isToast: action.isToast}
+    case 'TOAST/SET_TOAST':
+      return {
+        ...state,
+        isToast: action.isToast,
+        toastType: action.toastType,
+        text: action.text
+      }
     default:
       return state
   }

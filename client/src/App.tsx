@@ -8,6 +8,8 @@ import { connect, Provider } from 'react-redux'
 import Preloader from './components/Preloader/Preloder'
 import { initializeApp } from './flux/reducers/app'
 import * as A from './types/app'
+import { Toast } from './components'
+import ToastContainer from './containers/ToastContainer'
 
 const TodosContainer = lazy(() => import('./containers/TodosContainer'))
 const SettingsContainer = lazy(() => import('./containers/SettingsContainer'))
@@ -26,11 +28,12 @@ const App: FC<A.storeProps> = props => {
               <Route exact path='/' render={() => <Redirect to='/todos'/>}/>
               <Route path='/todos' render={() => <TodosContainer/>}/>
               <Route path='/settings' render={() => <SettingsContainer/>}/>
-              <Route path='/auth' render={() => <AuthContainer/>}/>
+              <AuthContainer/>
               <Route path='*' render={() => <>404 Not Found</>}/>
             </Switch>
           </Suspense>
         </div>
+        <ToastContainer/>
       </>
     )
   else return <Preloader/>

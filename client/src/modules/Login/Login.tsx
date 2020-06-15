@@ -1,4 +1,5 @@
 import React, { FC } from 'react'
+import { NavLink } from 'react-router-dom'
 import { reduxForm } from 'redux-form'
 
 import { ILoginForm } from '../../types/auth'
@@ -9,10 +10,9 @@ const LoginReduxForm = reduxForm<ILoginForm>({form: 'login'})(LoginForm)
 
 type LoginCardProps = {
   login: (email: string, password: string) => void
-  setRegister: (register: boolean) => void
 }
 
-const Login: FC<LoginCardProps> = ({login, setRegister}) => {
+const Login: FC<LoginCardProps> = ({login}) => {
   const loginOnSubmit = (formData: ILoginForm) => login(formData.email, formData.password)
 
   return <div className='text-center'>
@@ -22,7 +22,7 @@ const Login: FC<LoginCardProps> = ({login, setRegister}) => {
         <LoginReduxForm onSubmit={loginOnSubmit}/>
       </div>
     </Card>
-    <Button onClick={() => setRegister(true)} className='btn-link'>Зарегистрироваться</Button>
+    <NavLink to='/register' className='btn-link'>Зарегистрироваться</NavLink>
   </div>
 }
 export default Login

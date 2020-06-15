@@ -1,13 +1,9 @@
 import express, { Request, Response } from 'express'
 import { check } from 'express-validator'
 import * as controller from '../controllers/user'
+import passport from 'passport'
 
 const router = express.Router()
-
-router.get('/a', (req: any, res: Response) => {
-  res.json({message: 'awdefde'})
-  console.log('adsads')
-})
 
 router.post('/register',
   [
@@ -25,5 +21,11 @@ router.get('/', controller.getAuthUser)
 
 router.put('/update/:id', controller.updateUser)
 router.delete('/delete/:id', controller.logout)
+
+// router.get('/auth/google',
+//   passport.authenticate('google', {scope: ''}))
+// router.get('/auth/google/callback',
+//   passport.authenticate('google', {failureRedirect: '/login'}),
+//   (req: Request, res: Response) => res.redirect('/api/todos'))
 
 export default router
