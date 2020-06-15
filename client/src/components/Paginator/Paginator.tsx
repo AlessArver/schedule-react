@@ -1,6 +1,6 @@
 import React, { FC, useEffect, useState } from 'react'
 import moment from 'moment'
-import arrowLeft from '../../assets/icons/arrowLeft.svg'
+import arrowLeft from '../../assets/images/icons/arrowLeft.svg'
 
 import './Paginator.sass'
 

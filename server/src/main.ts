@@ -24,7 +24,6 @@ app.use(cookieParser())
 app.use('/api/user', UserRouters)
 //app.use('/api/todos', auth, () => todoRouters(app, io))
 TodoRouters(app, io)
-//
 
 const start = async () => {
   try {

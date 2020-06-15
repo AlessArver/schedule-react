@@ -1,5 +1,5 @@
 import { InferActionsTypes } from '../index'
-import toastActions from '../actions/toast'
+import { ToastActions } from '../actions'
 
 const initialState = {
   isToast: false,
@@ -7,7 +7,7 @@ const initialState = {
   text: ''
 }
 export type ToastState = typeof initialState
-type Actions = InferActionsTypes<typeof toastActions>
+type Actions = InferActionsTypes<typeof ToastActions>
 
 export default (state = initialState, action: Actions): ToastState => {
   switch (action.type) {

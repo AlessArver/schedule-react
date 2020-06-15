@@ -5,18 +5,23 @@ import { getLoggedIn } from '../selectors/auth'
 import { RootState } from '../flux'
 import { compose } from 'redux'
 import { withAuthRedirect } from '../hoc/withAuthRouter'
+import { logout } from '../flux/reducers/auth'
 
-type PropsType = {
+type StateType= {
   loggedIn: boolean
 }
-
-const NavBarContainer: FC<PropsType> = ({loggedIn}) => {
-  return <NavBar loggedIn={loggedIn}/>
+type DispatchType = {
+  logout: () => void
 }
 
-const mapStateToProps = (state: RootState): PropsType => ({
+
+const NavBarContainer: FC<StateType & DispatchType> = ({loggedIn, logout}) => {
+  return <NavBar loggedIn={loggedIn} logout={logout}/>
+}
+
+const mapStateToProps = (state: RootState): StateType => ({
   loggedIn: getLoggedIn(state)
 })
 
 export default compose<ComponentType>(
-  connect(mapStateToProps), withAuthRedirect)(NavBarContainer)
+  connect(mapStateToProps, {logout}), withAuthRedirect)(NavBarContainer)

@@ -1,11 +1,11 @@
 import { InferActionsTypes } from '../index'
-import paginatorActions from '../actions/paginator'
+import { PaginatorActions } from '../actions'
 
 const initialState = {
   currentDate: new Date()
 }
 type State = typeof initialState
-type Actions = InferActionsTypes<typeof paginatorActions>
+type Actions = InferActionsTypes<typeof PaginatorActions>
 
 export default (state = initialState, action: Actions): State => {
   switch (action.type) {

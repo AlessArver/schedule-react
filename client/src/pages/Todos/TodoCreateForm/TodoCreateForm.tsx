@@ -5,15 +5,18 @@ import { createField, Input } from '../../common/Forms/Forms'
 import './TodoCreateForm.sass'
 import * as t from '../../../types/todo'
 import { Button } from '../../../components'
+import { useTranslation } from 'react-i18next'
 
 const maxLengthField = maxLength(100)
 
-const TodoCreateForm: FC<InjectedFormProps<t.form>> = ({handleSubmit}) => (
-  <form onSubmit={handleSubmit} className='form mt-5'>
-    {createField<t.formKeys>('text', 'Что ты будешь делать?',
+const TodoCreateForm: FC<InjectedFormProps<t.form>> = ({handleSubmit}) => {
+  const {t, i18n} = useTranslation()
+
+  return <form onSubmit={handleSubmit} className='form mt-5'>
+    {createField<t.formKeys>('text', t('todo.create_todo_form.input'),
       [required, maxLengthField], Input, {})}
-    <Button>Создать</Button>
+    <Button>{t('todo.create_todo_form.button')}</Button>
   </form>
-)
+}
 
 export default reduxForm<t.form>({form: 'todoForm'})(TodoCreateForm)

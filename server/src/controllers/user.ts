@@ -65,8 +65,7 @@ export const getUser = (req: Request, res: Response) => {
 export const getAuthUser = async (req: any, res: Response) => {
   try {
     const token = req.cookies['userToken']
-    const decoded = jwt.verify(token, 'jhkl4ew990GK93hjGHJ')
-    let user: any = decoded
+    let user: any = jwt.verify(token, 'jhkl4ew990GK93hjGHJ')
 
     UserModel.findById(user.userId, (e, user: UserDocument) => {
       e ? res.json({resultCode: 1, message: 'Нет авторизации'})
@@ -95,7 +94,15 @@ export const updateUser = (req: Request, res: Response) => {
   )
 }
 
-export const logout = async (req: Request, res: Response) => {
+export const logout =  (req: Request, res: Response) => {
+  console.log('log out')
+  // if (req.cookies['userToken'])
+  //   res
+  //     .cookie('userToken', '', {maxAge: 0})
+  //     .json({message: 'logged out'})
+}
+
+export const deleteUser = async (req: Request, res: Response) => {
   UserModel.findByIdAndDelete(req.params.id, e => {
     e ? res.json({resultCode: 1, message: 'Что-то пошло не так. Попробуйте снова.', e: e})
       : res.json({resultCode: 0, message: 'user is deleted'})

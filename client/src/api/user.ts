@@ -26,7 +26,12 @@ export default {
   },
   logout() {
     return instance
-      .delete<api.BaseResponseAPI>('logout')
+      .get('logout')
+      .then(res => res.data)
+  },
+  deleteUser(id: string) {
+    return instance
+      .delete<api.BaseResponseAPI>('delete/:'+ id)
       .then(res => res.data)
   },
   getAuthUser() {

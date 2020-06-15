@@ -3,7 +3,7 @@ import { FC } from 'react'
 import { Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 
-import Auth from '../pages/Auth/Auth'
+import { Auth } from '../pages/'
 import { RootState } from '../flux'
 import { getLoggedIn, getToken } from '../selectors/auth'
 import { AuthMapDispatchToProps, AuthMapStateToProps } from '../types/auth'
@@ -17,7 +17,7 @@ const AuthContainer: FC<AuthMapStateToProps & AuthMapDispatchToProps> = props =>
 
   if (props.loggedIn) return <Redirect to='/todos'/>
 
-  return <Auth login={login} register={register}/>
+  return <Auth login={props.login} register={props.register}/>
 }
 
 const mapStateToProps = (state: RootState) => ({

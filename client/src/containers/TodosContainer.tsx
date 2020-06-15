@@ -1,8 +1,9 @@
 import React, { ComponentType, FC, useEffect } from 'react'
 import { connect } from 'react-redux'
 import { compose } from 'redux'
+
 import { withAuthRedirect } from '../hoc/withAuthRouter'
-import Todos from '../pages/Todos/Todos'
+import { Todos } from '../pages'
 import { getTodos } from '../selectors/todo'
 import { RootState } from '../flux'
 import * as t from '../types/todo'

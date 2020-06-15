@@ -1,10 +1,11 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import * as serviceWorker from './serviceWorker'
-import MainApp from './App'
-import 'bootstrap/dist/css/bootstrap.css';
+import './i18n'
+import 'bootstrap/dist/css/bootstrap.css'
 
 import './styles/index.sass'
+import MainApp from './App'
 
 ReactDOM.render(<MainApp/>, document.getElementById('root'))
 

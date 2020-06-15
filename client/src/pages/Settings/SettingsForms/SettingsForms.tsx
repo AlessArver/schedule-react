@@ -1,7 +1,7 @@
 import { InjectedFormProps, reduxForm } from 'redux-form'
 import React, { FC } from 'react'
-import { createField, Input } from '../common/Forms/Forms'
-import { required } from '../../utils/validators'
+import { createField, Input } from '../../common/Forms/Forms'
+import { required } from '../../../utils/validators'
 
 const SettingsFormName: FC<InjectedFormProps<string>> = ({handleSubmit}) => (
   <form onSubmit={handleSubmit}>

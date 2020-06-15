@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import Settings from '../pages/Settings/Settings'
+import { Settings } from '../pages/'
 import { RootState } from '../flux'
 import { connect } from 'react-redux'
 import { getUser } from '../selectors/auth'

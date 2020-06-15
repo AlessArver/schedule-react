@@ -1,7 +1,6 @@
 import express, { Request, Response } from 'express'
 import { check } from 'express-validator'
 import * as controller from '../controllers/user'
-import passport from 'passport'
 
 const router = express.Router()
 
@@ -20,7 +19,16 @@ router.get('/:id', controller.getUser)
 router.get('/', controller.getAuthUser)
 
 router.put('/update/:id', controller.updateUser)
-router.delete('/delete/:id', controller.logout)
+
+router.get('/logout',  (req: Request, res: Response) => {
+  console.log('log out')
+  // if (req.cookies['userToken'])
+  //   res
+  //     .cookie('userToken', '', {maxAge: 0})
+  //     .json({message: 'logged out'})
+})
+
+router.delete('/delete/:id', controller.deleteUser)
 
 // router.get('/auth/google',
 //   passport.authenticate('google', {scope: ''}))

@@ -1,19 +1,21 @@
 import React, { ComponentType, FC, lazy, Suspense, useEffect } from 'react'
 import { BrowserRouter, Redirect, Route, Switch, withRouter } from 'react-router-dom'
-import './App.css'
-import NavbarContainer from './containers/NavbarContainer'
-import { compose } from 'redux'
-import store, { RootState } from './flux'
 import { connect, Provider } from 'react-redux'
-import Preloader from './components/Preloader/Preloder'
+import { compose } from 'redux'
+
+import './App.css'
+import store, { RootState } from './flux'
 import { initializeApp } from './flux/reducers/app'
 import * as A from './types/app'
-import { Toast } from './components'
-import ToastContainer from './containers/ToastContainer'
+import { Footer, Preloader } from './components'
+import {
+  AuthContainer,
+  SettingsContainer,
+  TodosContainer,
+  NavbarContainer,
+  ToastContainer
+} from './containers'
 
-const TodosContainer = lazy(() => import('./containers/TodosContainer'))
-const SettingsContainer = lazy(() => import('./containers/SettingsContainer'))
-const AuthContainer = lazy(() => import('./containers/AuthContainer'))
 
 const App: FC<A.storeProps> = props => {
   useEffect(() => props.initializeApp(), [props.initialized])
@@ -34,6 +36,7 @@ const App: FC<A.storeProps> = props => {
           </Suspense>
         </div>
         <ToastContainer/>
+        <Footer/>
       </>
     )
   else return <Preloader/>
@@ -49,9 +52,9 @@ const AppContainer = compose<ComponentType>(
 const MainApp: FC = () => (
   <React.StrictMode>
     <BrowserRouter>
-      <Provider store={store}>
-        <AppContainer/>
-      </Provider>
+        <Provider store={store}>
+          <AppContainer/>
+        </Provider>
     </BrowserRouter>
   </React.StrictMode>
 )

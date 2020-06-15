@@ -7,8 +7,11 @@ import TodoCreateReduxForm from './TodoCreateForm/TodoCreateForm'
 import Paginator from '../../components/Paginator/Paginator'
 import socket from '../../socket'
 import { TodoType } from '../../types'
+import { useTranslation } from 'react-i18next'
 
 const Todos: FC<t.TodosProps> = props => {
+  const {t, i18n} = useTranslation()
+
   const onSubmit = (data: t.form) => {
     props.addTodo(data.text)
   }
@@ -31,7 +34,7 @@ const Todos: FC<t.TodosProps> = props => {
   return (
     <div className='todos-wrapper'>
       <Paginator onPageChanged={props.onPageChanged}/>
-      {!todos.length && <h2>Нет задач</h2>}
+      {!todos.length && <h2>{t('todo.no_todos')}</h2>}
         {todos}
       <TodoCreateReduxForm onSubmit={onSubmit}/>
     </div>
