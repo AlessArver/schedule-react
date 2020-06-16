@@ -7,7 +7,6 @@ import mongoose from 'mongoose'
 
 import { TodoRouters, UserRouters } from './routes'
 import { auth } from './middleware/auth'
-//
 require('dotenv').config()
 
 const PORT = process.env.PORT || 5000
