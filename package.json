@@ -7,5 +7,8 @@
   "license": "MIT",
   "scripts": {
     "start": "cross-env NODE_ENV=production node server/dist/main.js"
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.2"
   }
 }
