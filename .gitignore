@@ -1,12 +1,11 @@
-/.git
-
 /.idea
 .idea
 
 /node_modules
 node_modules
 
-/dist
+/src/dist
+src/dist
 
 package-lock.json
 yarn.lock
