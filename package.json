@@ -3,7 +3,7 @@
   "author": "Aless Arver",
   "license": "MIT",
   "scripts": {
-    "start": "cross-env NODE_ENV=production node dist/main.js",
+    "start": "NODE_ENV=production node src/dist/main.js",
     "build": "tsc",
     "server": "nodemon src/dist/main.js",
     "dev": "cross-env NODE_ENV=development concurrently \"yarn server\" \"yarn client\"",
