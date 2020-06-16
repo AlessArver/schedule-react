@@ -1,0 +1,11 @@
+{
+  "name": "schedule-react",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/AlessArver/schedule-react.git",
+  "author": "Aless Arver",
+  "license": "MIT",
+  "scripts": {
+    "start": "cross-env NODE_ENV=production node server/dist/main.js"
+  }
+}
