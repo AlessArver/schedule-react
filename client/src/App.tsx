@@ -51,7 +51,7 @@ const AppContainer = compose<ComponentType>(
 
 const MainApp: FC = () => (
   <React.StrictMode>
-    <BrowserRouter>
+    <BrowserRouter basename={process.env.PUBLIC_URL}>
         <Provider store={store}>
           <AppContainer/>
         </Provider>
