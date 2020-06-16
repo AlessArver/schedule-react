@@ -2,6 +2,12 @@
   "name": "todo-react",
   "version": "0.1.0",
   "private": true,
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
@@ -38,11 +44,11 @@
     "typescript": "^3.9.3",
     "universal-cookie": "^4.0.3"
   },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+  "devDependencies": {
+    "@types/react-redux": "^7.1.9",
+    "@types/react-router-dom": "^5.1.5",
+    "@types/socket.io-client": "^1.4.33",
+    "sass-loader": "^8.0.2"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -59,11 +65,5 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://localhost:5000",
-  "devDependencies": {
-    "@types/react-redux": "^7.1.9",
-    "@types/react-router-dom": "^5.1.5",
-    "@types/socket.io-client": "^1.4.33",
-    "sass-loader": "^8.0.2"
-  }
+  "proxy": "http://localhost:5000"
 }

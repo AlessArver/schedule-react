@@ -1,4 +1,4 @@
-require('dotenv').config()
+import path from 'path'
 import { createServer } from 'http'
 import express from 'express'
 import cookieParser from 'cookie-parser'
@@ -7,6 +7,8 @@ import mongoose from 'mongoose'
 
 import { TodoRouters, UserRouters } from './routes'
 import { auth } from './middleware/auth'
+
+require('dotenv').config()
 
 const PORT = process.env.PORT || 5000
 
@@ -21,6 +23,13 @@ app.use(bodyParser.json())
 
 app.use(cookieParser())
 
+if (process.env.NODE_ENV === 'production') {
+  app.use('/', express.static(path.join(__dirname, '..', 'client', 'build')))
+  app.get('*', (req: express.Request, res: express.Response) => {
+    res.sendFile(path.resolve(__dirname, '..', 'client', 'build', 'index.html'))
+  })
+}
+//
 app.use('/api/user', UserRouters)
 //app.use('/api/todos', auth, () => todoRouters(app, io))
 TodoRouters(app, io)
