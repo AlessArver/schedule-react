@@ -40,7 +40,7 @@ export const login = async (req: Request, res: Response) => {
 
     const token = jwt.sign(
       {userId: user.id},
-      'jhkl4ew990GK93hjGHJ',
+      process.env.SECRET_KEY,
       {expiresIn: 10080}
     )
     res
@@ -65,7 +65,7 @@ export const getUser = (req: Request, res: Response) => {
 export const getAuthUser = async (req: any, res: Response) => {
   try {
     const token = req.cookies['userToken']
-    let user: any = jwt.verify(token, 'jhkl4ew990GK93hjGHJ')
+    let user: any = jwt.verify(token, process.env.SECRET_KEY)
 
     UserModel.findById(user.userId, (e, user: UserDocument) => {
       e ? res.json({resultCode: 1, message: 'Нет авторизации'})

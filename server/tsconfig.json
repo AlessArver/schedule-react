@@ -7,8 +7,8 @@
         "noImplicitAny": true,
         "moduleResolution": "node",
         "sourceMap": true,
-        "outDir": "src/dist",
-        "baseUrl": ".",
+        "outDir": "dist",
+        "baseUrl": "..",
         "paths": {
             "*": [
                 "node_modules/*",
@@ -17,6 +17,6 @@
         }
     },
     "include": [
-        "src/**/*"
+      "src/**/*"
     ]
 }

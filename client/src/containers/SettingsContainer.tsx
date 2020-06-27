@@ -1,16 +1,22 @@
 import React, { FC } from 'react'
+import { connect } from 'react-redux'
+
 import { Settings } from '../pages/'
 import { RootState } from '../flux'
-import { connect } from 'react-redux'
 import { getUser } from '../selectors/auth'
-import { IsAuth } from '../types/isAuth'
+import { UserType } from '../types'
 
-const SettingsContainer: FC<IsAuth> = props => {
+type SettingsMapType = {
+  user: UserType | null
+}
+
+const SettingsContainer: FC<SettingsMapType> = props => {
   return <Settings user={props.user}/>
 }
 
-const maStateToProps = (state: RootState): IsAuth => ({
+const maStateToProps = (state: RootState): SettingsMapType => ({
   user: getUser(state)
 })
 
-export default connect(maStateToProps)(SettingsContainer)
+export default connect(maStateToProps)
+(SettingsContainer)

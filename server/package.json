@@ -5,13 +5,13 @@
   "scripts": {
     "start": "cross-env NODE_ENV=production node src/dist/main.js",
     "build": "tsc",
-    "server": "nodemon src/dist/main.js",
-    "dev": "cross-env NODE_ENV=development concurrently \"yarn server\" \"yarn client\"",
+    "server": "nodemon dist/main.js",
+    "dev": "cross-env NODE_ENV=development concurrently \\\"yarn server\\\" \\\"yarn client\\\"",
     "watch-ts": "tsc -w",
-    "client": "npm run start --prefix client",
-    "client:install": "npm run install --prefix client",
-    "client:build": "npm run build --prefix client",
-    "heroku-postbuild": "cd client && npm install && npm run build"
+    "client": "npm run start --prefix ../client",
+    "client:install": "npm run install --prefix ../client",
+    "client:build": "npm run build --prefix ../client",
+    "heroku-postbuild": "cd ../client && npm install && npm run build"
   },
   "dependencies": {
     "@types/passport-google-oauth": "^1.0.41",

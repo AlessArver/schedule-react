@@ -1,12 +1,14 @@
 import { Action, applyMiddleware, combineReducers, compose, createStore } from 'redux'
+import thunk, { ThunkAction } from 'redux-thunk'
+import { reducer as formReducer } from 'redux-form'
 import createSagaMiddleware from 'redux-saga'
+
 import todo from './reducers/todo'
 import authReducder from './reducers/auth'
 import loaderReducer from './reducers/loader'
 import toastReducer from './reducers/toast'
 import paginatorReducer from './reducers/paginator'
-import thunk, { ThunkAction } from 'redux-thunk'
-import { reducer as formReducer } from 'redux-form'
+
 import app from './reducers/app'
 
 const rootReducer = combineReducers({

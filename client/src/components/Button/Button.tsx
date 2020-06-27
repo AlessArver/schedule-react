@@ -10,7 +10,7 @@ type ButtonProps = {
   onClick?: () => void
 }
 
-const Button: FC<ButtonProps> = ({children, className, type, onClick, ...props}) => (
+const Button: FC<ButtonProps> = ({children, className, type, onClick}) => (
   <button
     onClick={onClick}
     className={classNames('btn button', className)}

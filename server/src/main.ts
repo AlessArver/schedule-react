@@ -22,14 +22,14 @@ app.use(bodyParser.urlencoded({extended: true}))
 app.use(bodyParser.json())
 
 app.use(cookieParser())
-//
-if (process.env.NODE_ENV === 'production') {
-  app.use(express.static(path.join(__dirname, '..', '..', 'client', 'build')))
+
+//if (process.env.NODE_ENV === 'production') {
+  //app.use(express.static(path.join(__dirname, '..', '..', 'client', 'build')))
   // app.get('*', (req: express.Request, res: express.Response) => {
   //   //res.send('Hiiii')
   //   res.sendFile(path.join(__dirname + '../../../client/build/index.html'))
   // })
-}
+//}
 
 app.use('/api/user', UserRouters)
 //app.use('/api/todos', auth, () => todoRouters(app, io))

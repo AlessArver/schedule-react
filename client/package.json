@@ -35,6 +35,7 @@
     "moment": "^2.26.0",
     "node-sass": "^4.14.1",
     "react": "^16.13.1",
+    "react-document-title": "^2.0.3",
     "react-dom": "^16.13.1",
     "react-i18next": "^11.5.1",
     "react-redux": "^7.2.0",
@@ -46,6 +47,7 @@
     "redux-thunk": "^2.3.0",
     "sass-loader": "^8.0.2",
     "socket.io-client": "^2.3.0",
+    "styled-components": "^5.1.1",
     "typescript": "^3.9.3",
     "universal-cookie": "^4.0.3"
   },
@@ -64,5 +66,9 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://localhost:5000"
+  "proxy": "http://localhost:5000",
+  "devDependencies": {
+    "@types/react-document-title": "^2.0.4",
+    "@types/styled-components": "^5.1.0"
+  }
 }

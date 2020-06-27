@@ -1,4 +1,5 @@
 import React, { FC } from 'react'
+import DocumentTitle from 'react-document-title'
 import { reduxForm } from 'redux-form'
 
 import { IRegisterForm } from '../../types/auth'
@@ -20,14 +21,16 @@ const Register: FC<RegisterCardProps> = ({register}) => {
   const registerOnSubmit = (formData: IRegisterForm) =>
     register(formData.name, formData.surname, formData.email, formData.password)
 
-  return <div className={`text-center justify-content-center align-content-center`}>
-    <Card className='mb-4'>
-      <div className='card-body'>
-        <h5 className='card-title text-center mb-5 my-card-title'>{t('auth.register')}</h5>
-        <RegisterReduxForm onSubmit={registerOnSubmit}/>
-      </div>
-    </Card>
-    <NavLink to='/login' className='btn-link'>{t('auth.login')}</NavLink>
-  </div>
+  return <DocumentTitle title='Register'>
+    <div className={`text-center justify-content-center align-content-center`}>
+      <Card className='mb-4'>
+        <div className='card-body'>
+          <h5 className='card-title text-center mb-5 my-card-title'>{t('auth.register')}</h5>
+          <RegisterReduxForm onSubmit={registerOnSubmit}/>
+        </div>
+      </Card>
+      <NavLink to='/login' className='btn-link'>{t('auth.login')}</NavLink>
+    </div>
+  </DocumentTitle>
 }
 export default Register

@@ -8,6 +8,7 @@ import Paginator from '../../components/Paginator/Paginator'
 import socket from '../../socket'
 import { TodoType } from '../../types'
 import { useTranslation } from 'react-i18next'
+import DocumentTitle from 'react-document-title'
 
 const Todos: FC<t.TodosProps> = props => {
   const {t, i18n} = useTranslation()
@@ -31,13 +32,13 @@ const Todos: FC<t.TodosProps> = props => {
     updateTodoText={props.updateTodoText}
     updateTodoTextSuccess={props.updateTodoTextSuccess}/>)
 
-  return (
+  return <DocumentTitle title='Todos'>
     <div className='todos-wrapper'>
       <Paginator onPageChanged={props.onPageChanged}/>
       {!todos.length && <h2>{t('todo.no_todos')}</h2>}
-        {todos}
+      {todos}
       <TodoCreateReduxForm onSubmit={onSubmit}/>
     </div>
-  )
+  </DocumentTitle>
 }
 export default React.memo(Todos)
